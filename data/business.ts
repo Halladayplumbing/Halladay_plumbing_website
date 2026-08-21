@@ -62,16 +62,27 @@ export const business = {
   state: "UT",
   serviceRegion: "Southern Utah",
 
-  // Hours have not been confirmed. Do not display specific hours until
-  // Halladay supplies them — components should check `confirmed`.
+  // Sourced directly from Halladay's live Google Business Profile
+  // (confirmed Aug 2026). Re-verify periodically — Google listings can
+  // change without the site being updated.
   hours: {
-    confirmed: false,
-    display: "",
+    confirmed: true,
+    display: "Open 24 hours Mon–Sat, Closed Sunday",
+    schedule: {
+      monday: "Open 24 hours",
+      tuesday: "Open 24 hours",
+      wednesday: "Open 24 hours",
+      thursday: "Open 24 hours",
+      friday: "Open 24 hours",
+      saturday: "Open 24 hours",
+      sunday: "Closed",
+    },
   },
 
   emergencyAvailability: {
-    // "24/7" and similar claims must not be used until verified.
-    confirmed: false,
+    // Supported by the "Open 24 hours" listing on Halladay's Google
+    // Business Profile (Mon–Sat) — see hours above.
+    confirmed: true,
     label: "Emergency service available",
   },
 
@@ -85,14 +96,21 @@ export const business = {
   credentials: {
     licensed: { confirmed: false, label: "Licensed" },
     insured: { confirmed: false, label: "Insured" },
+    // "Identifies as veteran-owned" badge shown on Halladay's Google
+    // Business Profile.
+    veteranOwned: { confirmed: true, label: "Veteran-Owned" },
   },
 
   reviews: {
-    // Populate once Google review data is confirmed. Do not fabricate
-    // rating/count in the meantime — UI hides these fields when null.
-    googleRating: null as number | null,
-    googleReviewCount: null as number | null,
-    googlePlaceUrl: "",
+    // Sourced directly from Halladay's live Google Business Profile
+    // (confirmed Aug 2026): 22 reviews, all 5-star. Re-check periodically
+    // — this is a snapshot, not a live-updating value. True real-time
+    // sync would require a Google Places API key (billing-enabled Google
+    // Cloud project) wired into a small server route; ask if you want
+    // that set up.
+    googleRating: 5.0 as number | null,
+    googleReviewCount: 22 as number | null,
+    googlePlaceUrl: "https://share.google/mPPnRa5FMAp4Zg4Yz",
   },
 } as const;
 

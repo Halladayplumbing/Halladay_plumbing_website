@@ -8,8 +8,9 @@ import { PageHero } from "@/components/sections/PageHero";
 import { CTAButton } from "@/components/CTAButton";
 import { PhoneButton } from "@/components/PhoneButton";
 import { ServiceCard } from "@/components/ServiceCard";
+import { ServiceAreaGrid } from "@/components/ServiceAreaGrid";
 import { WhyHalladayInline } from "@/components/sections/WhyHalladayInline";
-import { ReviewsGrid } from "@/components/ReviewsGrid";
+import { TestimonialCarousel } from "@/components/TestimonialCarousel";
 import { FAQAccordion } from "@/components/FAQAccordion";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { StructuredData } from "@/components/StructuredData";
@@ -89,7 +90,8 @@ export default async function ServiceAreaPage({ params }: { params: Promise<{ sl
       </section>
 
       <WhyHalladayInline />
-      <ReviewsGrid />
+      <TestimonialCarousel />
+      <ServiceAreaGrid />
       <FAQAccordion faqs={getFaqsFor("homepage")} title={`${area.city} Plumbing FAQs`} />
       <FinalCTA headline={`Need a Plumber in ${area.city}?`} />
     </>
