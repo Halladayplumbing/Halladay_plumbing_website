@@ -1,5 +1,6 @@
 import { PhoneOff, Waves, Droplets, ArrowUpFromLine, Flame, ShowerHead } from "lucide-react";
 import { getServiceById } from "@/data/services";
+import { getFormById } from "@/data/forms";
 import { getFaqsFor } from "@/data/faqs";
 import { getPrimaryServiceArea } from "@/data/serviceAreas";
 import { business } from "@/data/business";
@@ -7,6 +8,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { PageHero } from "@/components/sections/PageHero";
 import { PhoneButton } from "@/components/PhoneButton";
 import { CTAButton } from "@/components/CTAButton";
+import { QualificationForm } from "@/components/forms/QualificationForm";
 import { WhyHalladayInline } from "@/components/sections/WhyHalladayInline";
 import { ReviewsGrid } from "@/components/ReviewsGrid";
 import { RelatedServices } from "@/components/RelatedServices";
@@ -16,6 +18,7 @@ import { serviceSchema } from "@/lib/schema";
 import { pageMetadata } from "@/lib/seo";
 
 const service = getServiceById("emergency-plumbing")!;
+const form = getFormById("emergency")!;
 
 export const metadata = pageMetadata({
   title: "Emergency Plumber in Cedar City, UT",
@@ -97,7 +100,7 @@ export default function EmergencyPlumberPage() {
         }
         secondaryCta={
           <CTAButton
-            href="/contact/?service=emergency-plumbing"
+            href="#qualify"
             size="lg"
             variant="outline"
             className="!border-white !text-white hover:!bg-white/10"
@@ -149,13 +152,25 @@ export default function EmergencyPlumberPage() {
         </div>
       </section>
 
+      <section id="qualify" className="scroll-mt-24 py-14 lg:py-20">
+        <div className="container-page mx-auto max-w-xl">
+          <h2 className="text-center text-2xl font-extrabold text-ink sm:text-3xl">Request Emergency Service</h2>
+          <p className="mt-2 text-center text-ink-muted">
+            Calling is fastest for an active emergency — use this if you&apos;re unable to call.
+          </p>
+          <div className="mt-8">
+            <QualificationForm config={form} funnelId="organic" thankYouPath="/thank-you/emergency/" />
+          </div>
+        </div>
+      </section>
+
       <section className="bg-danger py-12 text-center text-white">
         <div className="container-page mx-auto max-w-xl">
           <h2 className="text-xl font-bold sm:text-2xl">Dealing With a Plumbing Emergency Right Now?</h2>
           <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
             <PhoneButton emergency size="lg" variant="accent" className="!bg-white !text-danger hover:!bg-white/90" />
             <CTAButton
-              href="/contact/?service=emergency-plumbing"
+              href="#qualify"
               size="lg"
               variant="outline"
               className="!border-white !text-white hover:!bg-white/10"

@@ -1,5 +1,6 @@
 import { CheckCircle2, Droplets } from "lucide-react";
 import { getActiveOfferForService } from "@/data/offers";
+import { getFormById } from "@/data/forms";
 import { getFaqsFor } from "@/data/faqs";
 import { getPrimaryServiceArea } from "@/data/serviceAreas";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
@@ -7,6 +8,7 @@ import { PageHero } from "@/components/sections/PageHero";
 import { CTAButton } from "@/components/CTAButton";
 import { PhoneButton } from "@/components/PhoneButton";
 import { OfferCard } from "@/components/OfferCard";
+import { QualificationForm } from "@/components/forms/QualificationForm";
 import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 import { WhyHalladayInline } from "@/components/sections/WhyHalladayInline";
 import { ReviewsGrid } from "@/components/ReviewsGrid";
@@ -55,6 +57,7 @@ const installSteps = [
 export default function WaterSoftenersPage() {
   const offer = getActiveOfferForService("water-softeners");
   const primaryArea = getPrimaryServiceArea();
+  const form = getFormById("water-softener")!;
 
   return (
     <>
@@ -74,7 +77,7 @@ export default function WaterSoftenersPage() {
         subheadline="Hard water takes a toll on your appliances, fixtures, faucets, showers, and water heater over time. A properly installed water softener protects your home's plumbing system at the source."
         imageLabel="Whole-house water softener system installed in a Cedar City home"
         primaryCta={
-          <CTAButton href="/contact/?service=water-softeners" size="lg">
+          <CTAButton href="#qualify" size="lg">
             Get a Water Softener Estimate
           </CTAButton>
         }
@@ -162,22 +165,19 @@ export default function WaterSoftenersPage() {
       {offer && (
         <section className="bg-primary-light py-14 lg:py-20">
           <div className="container-page mx-auto max-w-2xl">
-            <OfferCard offer={offer} variant="featured" ctaHref="/contact/?service=water-softeners" />
+            <OfferCard offer={offer} variant="featured" ctaHref="#qualify" />
           </div>
         </section>
       )}
 
-      <section className="bg-primary-dark py-12 text-center text-white">
+      <section id="qualify" className="scroll-mt-24 bg-surface py-14 lg:py-20">
         <div className="container-page mx-auto max-w-xl">
-          <h2 className="text-xl font-bold sm:text-2xl">Get a Personalized Water Softener Estimate</h2>
-          <p className="mt-2 text-white/85">
+          <h2 className="text-center text-2xl font-extrabold text-ink sm:text-3xl">Get My Water Softener Estimate</h2>
+          <p className="mt-2 text-center text-ink-muted">
             Tell us a bit about your home and we&apos;ll follow up with a recommendation.
           </p>
-          <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
-            <CTAButton href="/contact/?service=water-softeners" size="lg" variant="accent">
-              Get My Water Softener Estimate
-            </CTAButton>
-            <PhoneButton size="lg" variant="outline" />
+          <div className="mt-8">
+            <QualificationForm config={form} offerId={offer?.id} funnelId="organic" thankYouPath="/thank-you/water-softener/" />
           </div>
         </div>
       </section>

@@ -2,6 +2,7 @@ import { CheckCircle2 } from "lucide-react";
 import type { Service } from "@/data/services";
 import type { ServicePageContent } from "@/data/servicePageContent";
 import { getActiveOfferForService } from "@/data/offers";
+import { getFormForService } from "@/data/forms";
 import { getFaqsFor } from "@/data/faqs";
 import { getPrimaryServiceArea } from "@/data/serviceAreas";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
@@ -9,6 +10,7 @@ import { PageHero } from "@/components/sections/PageHero";
 import { CTAButton } from "@/components/CTAButton";
 import { PhoneButton } from "@/components/PhoneButton";
 import { OfferCard } from "@/components/OfferCard";
+import { QualificationForm } from "@/components/forms/QualificationForm";
 import { WhyHalladayInline } from "@/components/sections/WhyHalladayInline";
 import { ReviewsGrid } from "@/components/ReviewsGrid";
 import { RelatedServices } from "@/components/RelatedServices";
@@ -20,6 +22,8 @@ import { serviceSchema } from "@/lib/schema";
 export function ServicePageTemplate({ service, content }: { service: Service; content: ServicePageContent }) {
   const offer = getActiveOfferForService(service.id);
   const primaryArea = getPrimaryServiceArea();
+  const form = getFormForService(service);
+  const thankYouPath = service.thankYouSlug ? `/thank-you/${service.thankYouSlug}/` : "/thank-you/";
 
   return (
     <>
@@ -39,9 +43,15 @@ export function ServicePageTemplate({ service, content }: { service: Service; co
         subheadline={content.heroSubheadline}
         imageLabel={content.heroImageLabel}
         primaryCta={
-          <CTAButton href={`/contact/?service=${service.id}`} size="lg">
-            {content.primaryCtaLabel}
-          </CTAButton>
+          form ? (
+            <CTAButton href="#qualify" size="lg" trackAs="schedule_service_click">
+              {content.primaryCtaLabel}
+            </CTAButton>
+          ) : (
+            <CTAButton href={`/contact/?service=${service.id}`} size="lg">
+              {content.primaryCtaLabel}
+            </CTAButton>
+          )
         }
         secondaryCta={<PhoneButton size="lg" variant="outline" className="!border-primary !text-primary" />}
       />
@@ -109,20 +119,34 @@ export function ServicePageTemplate({ service, content }: { service: Service; co
         </section>
       )}
 
-      <section className="bg-primary-dark py-12 text-center text-white">
-        <div className="container-page mx-auto max-w-xl">
-          <h2 className="text-xl font-bold sm:text-2xl">Ready to Get Started?</h2>
-          <p className="mt-2 text-white/85">
-            Answer a few quick questions and we&apos;ll follow up with an estimate.
-          </p>
-          <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
-            <CTAButton href={`/contact/?service=${service.id}`} size="lg" variant="accent">
-              {content.primaryCtaLabel}
-            </CTAButton>
-            <PhoneButton size="lg" variant="outline" />
+      {form ? (
+        <section id="qualify" className="scroll-mt-24 bg-surface py-14 lg:py-20">
+          <div className="container-page mx-auto max-w-xl">
+            <h2 className="text-center text-2xl font-extrabold text-ink sm:text-3xl">{content.primaryCtaLabel}</h2>
+            <p className="mt-2 text-center text-ink-muted">
+              Answer a few quick questions and we&apos;ll follow up with an estimate.
+            </p>
+            <div className="mt-8">
+              <QualificationForm config={form} offerId={offer?.id} funnelId="organic" thankYouPath={thankYouPath} />
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      ) : (
+        <section className="bg-primary-dark py-12 text-center text-white">
+          <div className="container-page mx-auto max-w-xl">
+            <h2 className="text-xl font-bold sm:text-2xl">Ready to Get Started?</h2>
+            <p className="mt-2 text-white/85">
+              Answer a few quick questions and we&apos;ll follow up with an estimate.
+            </p>
+            <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
+              <CTAButton href={`/contact/?service=${service.id}`} size="lg" variant="accent">
+                {content.primaryCtaLabel}
+              </CTAButton>
+              <PhoneButton size="lg" variant="outline" />
+            </div>
+          </div>
+        </section>
+      )}
 
       <WhyHalladayInline />
       <ReviewsGrid tag={service.id} />

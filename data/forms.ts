@@ -518,3 +518,13 @@ export function getFormById(id: string): QualificationFormConfig | undefined {
 export function getFormByServiceId(serviceId: string): QualificationFormConfig | undefined {
   return forms.find((f) => f.serviceId === serviceId);
 }
+
+// Resolves the qualification form for a service: an explicit
+// service.formId override (for services that share a closely related
+// form — e.g. tankless water heaters reusing the water heater form)
+// takes precedence, falling back to a form whose serviceId matches
+// directly.
+export function getFormForService(service: { id: string; formId?: string }): QualificationFormConfig | undefined {
+  if (service.formId) return getFormById(service.formId);
+  return getFormByServiceId(service.id);
+}

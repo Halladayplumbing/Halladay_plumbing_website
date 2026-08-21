@@ -20,6 +20,13 @@ export interface Service {
   priority?: number; // homepage grid ordering, lower = earlier
   offerId?: string; // data/offers.ts id
   funnelSlug?: string; // data/funnels.ts slug (paid landing page)
+  // data/forms.ts id override — only needed when this service should
+  // reuse a closely related qualification form instead of one matching
+  // its own id (e.g. tankless water heaters reusing "water-heater").
+  formId?: string;
+  // app/thank-you/[service]/ slug to redirect to after this service's
+  // form is submitted. Falls back to the generic /thank-you/ if unset.
+  thankYouSlug?: string;
   relatedServices: string[]; // service ids
   heroImageAlt: string;
 }
@@ -39,6 +46,7 @@ export const services: Service[] = [
     priority: 1,
     offerId: "water-softener-estimate",
     funnelSlug: "water-softener-installation",
+    thankYouSlug: "water-softener",
     relatedServices: ["water-heaters", "service-areas-cedar-city"],
     heroImageAlt: "Whole-house water softener system installed in a Cedar City home",
   },
@@ -55,6 +63,7 @@ export const services: Service[] = [
     priority: 2,
     offerId: "water-heater-diagnostic",
     funnelSlug: "water-heater-service",
+    thankYouSlug: "water-heater",
     relatedServices: ["tankless-water-heaters", "plumbing-maintenance"],
     heroImageAlt: "Water heater installation in a residential mechanical room",
   },
@@ -70,6 +79,8 @@ export const services: Service[] = [
     priority: 6,
     offerId: "water-heater-diagnostic",
     funnelSlug: "tankless-water-heater",
+    formId: "water-heater",
+    thankYouSlug: "water-heater",
     relatedServices: ["water-heaters", "water-softeners"],
     heroImageAlt: "Tankless water heater mounted on an interior wall",
   },
@@ -86,6 +97,7 @@ export const services: Service[] = [
     priority: 3,
     offerId: "drain-cleaning-special",
     funnelSlug: "drain-cleaning",
+    thankYouSlug: "drain-cleaning",
     relatedServices: ["emergency-plumbing", "leak-repair"],
     heroImageAlt: "Plumber running a drain cleaning line into a residential drain",
   },
@@ -101,6 +113,7 @@ export const services: Service[] = [
     featured: true,
     priority: 4,
     funnelSlug: "plumbing-repair",
+    thankYouSlug: "plumbing-repair",
     relatedServices: ["leak-repair", "plumbing-maintenance"],
     heroImageAlt: "Plumber repairing a fixture under a bathroom sink",
   },
@@ -116,6 +129,7 @@ export const services: Service[] = [
     featured: true,
     priority: 5,
     funnelSlug: "leak-repair",
+    thankYouSlug: "leak-repair",
     relatedServices: ["emergency-plumbing", "plumbing-repair"],
     heroImageAlt: "Plumber inspecting a pipe leak under a kitchen sink",
   },
@@ -131,6 +145,7 @@ export const services: Service[] = [
     featured: true,
     priority: 7,
     funnelSlug: "emergency-plumber",
+    thankYouSlug: "emergency",
     relatedServices: ["drain-cleaning", "leak-repair"],
     heroImageAlt: "Plumber responding to an urgent residential plumbing call",
   },
@@ -146,6 +161,7 @@ export const services: Service[] = [
     featured: true,
     priority: 8,
     funnelSlug: "commercial-plumbing",
+    thankYouSlug: "commercial",
     relatedServices: ["plumbing-maintenance", "drain-cleaning"],
     heroImageAlt: "Commercial plumbing work in a Southern Utah business",
   },
@@ -158,6 +174,8 @@ export const services: Service[] = [
     shortDescription: "Stay ahead of plumbing problems with routine maintenance.",
     outcomeStatement: "Catch small problems before they become expensive ones.",
     icon: "ShieldCheck",
+    formId: "plumbing-repair",
+    thankYouSlug: "plumbing-repair",
     relatedServices: ["water-heaters", "water-softeners"],
     heroImageAlt: "Plumber performing routine maintenance on home plumbing",
   },
@@ -170,6 +188,8 @@ export const services: Service[] = [
     shortDescription: "Improve water quality throughout your home.",
     outcomeStatement: "Improve the water quality throughout your home.",
     icon: "Filter",
+    formId: "water-softener",
+    thankYouSlug: "water-softener",
     relatedServices: ["water-softeners"],
     heroImageAlt: "Water treatment system installed in a home mechanical room",
   },
@@ -184,6 +204,7 @@ export const services: Service[] = [
     outcomeStatement: "Get plumbing done right from the ground up.",
     icon: "HardHat",
     funnelSlug: "new-construction",
+    thankYouSlug: "new-construction",
     relatedServices: ["commercial-plumbing", "water-softeners"],
     heroImageAlt: "Plumbing rough-in work at a new construction site",
   },
