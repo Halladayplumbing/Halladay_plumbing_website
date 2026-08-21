@@ -30,6 +30,8 @@ export const mobileNav: NavLink[] = [
   { label: "Leak Repair", href: "/leak-repair/" },
   { label: "Commercial Plumbing", href: "/commercial-plumbing/" },
   { label: "Emergency Plumbing", href: "/emergency-plumber-cedar-city-ut/" },
+  { label: "New Construction", href: "/new-construction-plumbing/" },
+  { label: "Diamond Club", href: "/diamond-club/" },
   { label: "Service Areas", href: "/service-areas/cedar-city-ut/" },
   { label: "Reviews", href: "/reviews/" },
   { label: "Specials", href: "/specials/" },
@@ -44,10 +46,12 @@ export const footerServiceLinks: NavLink[] = [
   { label: "Drain Cleaning", href: "/drain-cleaning/" },
   { label: "Emergency Plumbing", href: "/emergency-plumber-cedar-city-ut/" },
   { label: "Commercial Plumbing", href: "/commercial-plumbing/" },
+  { label: "New Construction", href: "/new-construction-plumbing/" },
 ];
 
 export const footerCompanyLinks: NavLink[] = [
   { label: "About", href: "/about/" },
+  { label: "Diamond Club", href: "/diamond-club/" },
   { label: "Reviews", href: "/reviews/" },
   { label: "Specials", href: "/specials/" },
   { label: "Contact", href: "/contact/" },

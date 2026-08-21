@@ -1,46 +1,59 @@
-import { ShieldCheck } from "lucide-react";
+import * as Icons from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import { servicePlan } from "@/data/servicePlan";
 import { CTAButton } from "@/components/CTAButton";
 
-// Plan inclusions/pricing are NOT confirmed. This section renders the
-// general concept and links to Contact rather than inventing coverage
-// details, pricing, or benefit lists. Replace `planConfirmed` and the
-// `inclusions` array once Halladay supplies real service plan details.
-const planConfirmed = false;
-const inclusions: string[] = [
-  // e.g. "Annual plumbing maintenance visit"
-  // e.g. "Water heater flushing"
-  // e.g. "Water softener maintenance"
-  // e.g. "Priority scheduling"
-];
-
+// Homepage teaser for the Diamond Club membership plan. Pulls straight
+// from data/servicePlan.ts (real client-supplied plan sheet) — edit that
+// file to change pricing/benefits. Full detail lives on /diamond-club/.
 export function ServicePlanSection() {
+  const featured = servicePlan.benefits.slice(0, 4);
+
   return (
     <section className="bg-surface py-16 lg:py-24">
       <div className="container-page grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
         <div>
           <div className="mb-3 flex items-center gap-2 text-primary">
-            <ShieldCheck className="h-6 w-6" aria-hidden="true" />
-            <span className="text-sm font-semibold uppercase tracking-wide">Service Plan</span>
+            <Icons.Gem className="h-6 w-6" aria-hidden="true" />
+            <span className="text-sm font-semibold uppercase tracking-wide">Membership Plan</span>
           </div>
-          <h2 className="text-section-title font-extrabold text-ink">Stay Ahead of Plumbing Problems</h2>
-          <p className="mt-4 text-ink-muted">
-            Halladay Plumbing offers a maintenance plan option for homeowners who want to catch
-            plumbing issues early. Contact us for current plan details and pricing.
-          </p>
+          <h2 className="text-section-title font-extrabold text-ink">
+            {servicePlan.name}
+            {servicePlan.trademark && <sup className="ml-0.5 text-lg">&trade;</sup>}
+          </h2>
+          <p className="mt-4 text-ink-muted">{servicePlan.description}</p>
 
-          {planConfirmed && inclusions.length > 0 && (
-            <ul className="mt-6 space-y-2 text-sm text-ink">
-              {inclusions.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          )}
+          <div className="mt-6 flex items-baseline gap-2">
+            <span className="text-3xl font-extrabold text-ink">{servicePlan.price.amount}</span>
+            <span className="text-ink-muted">{servicePlan.price.cadence}</span>
+          </div>
 
-          <div className="mt-8">
-            <CTAButton href="/contact/?interest=service-plan" size="lg">
-              View Service Plan
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <CTAButton href="/diamond-club/" size="lg">
+              View Diamond Club Benefits
+            </CTAButton>
+            <CTAButton
+              href="/contact/?interest=diamond-club"
+              size="lg"
+              variant="outline"
+              className="!border-primary !text-primary"
+            >
+              Join the Diamond Club
             </CTAButton>
           </div>
+        </div>
+
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {featured.map((benefit) => {
+            const Icon = (Icons[benefit.icon as keyof typeof Icons] as LucideIcon) ?? Icons.ShieldCheck;
+            return (
+              <div key={benefit.title} className="rounded-lg border border-border bg-background p-5 shadow-sm">
+                <Icon className="h-6 w-6 text-primary" aria-hidden="true" />
+                <p className="mt-3 text-sm font-bold text-ink">{benefit.title}</p>
+                <p className="mt-1 text-lg font-extrabold text-primary">{benefit.value}</p>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

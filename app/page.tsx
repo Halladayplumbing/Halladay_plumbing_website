@@ -8,6 +8,7 @@ import { ProcessSection } from "@/components/sections/ProcessSection";
 import { TestimonialCarousel } from "@/components/TestimonialCarousel";
 import { ServicePlanSection } from "@/components/sections/ServicePlanSection";
 import { EmergencyCTA } from "@/components/sections/EmergencyCTA";
+import { NewConstructionCTA } from "@/components/sections/NewConstructionCTA";
 import { ServiceAreaMap } from "@/components/ServiceAreaMap";
 import { FAQAccordion } from "@/components/FAQAccordion";
 import { FinalCTA } from "@/components/sections/FinalCTA";
@@ -41,6 +42,7 @@ export default function HomePage() {
       <TestimonialCarousel />
       <ServicePlanSection />
       <EmergencyCTA />
+      <NewConstructionCTA />
 
       <section className="py-16 lg:py-24">
         <div className="container-page">

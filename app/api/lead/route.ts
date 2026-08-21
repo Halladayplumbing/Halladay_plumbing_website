@@ -68,6 +68,7 @@ export async function POST(request: Request) {
         : undefined,
       city: sanitizeString(body?.contact?.city, 100) || undefined,
       address: sanitizeString(body?.contact?.address, 200) || undefined,
+      company: sanitizeString(body?.contact?.company, 150) || undefined,
     },
     service: sanitizeString(body?.service, 60) || "unknown",
     leadType: sanitizeString(body?.leadType, 60) || "general_lead",

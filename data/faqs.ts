@@ -206,6 +206,28 @@ export const faqGroups: Record<string, FAQ[]> = {
         "Routine inspection schedules vary by home and system age. We can recommend a schedule based on your home's plumbing.",
     },
   ],
+  "new-construction": [
+    {
+      question: "Do you work with builders and general contractors?",
+      answer:
+        "Yes. New construction is a dedicated line of work for us, separate from residential repair and service calls, so builder and GC projects get their own scheduling and point of contact.",
+    },
+    {
+      question: "What stages of a project do you handle?",
+      answer:
+        "We can come in as early as pre-construction planning through rough-in, and back again for finish and trim-out once the home is ready.",
+    },
+    {
+      question: "Can you plumb for a water softener during rough-in?",
+      answer:
+        "Yes, planning for a water softener or water treatment system during rough-in is common and straightforward to coordinate.",
+    },
+    {
+      question: "How do I get in touch about a new build?",
+      answer:
+        "Call our new construction line directly or use the new construction request form so we have your project details before we follow up.",
+    },
+  ],
 };
 
 export function getFaqsFor(key: string): FAQ[] {

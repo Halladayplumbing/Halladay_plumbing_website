@@ -212,6 +212,27 @@ export const funnels: ServiceFunnel[] = [
     },
     noindex: true,
   },
+  {
+    slug: "new-construction",
+    serviceId: "new-construction",
+    hero: {
+      eyebrow: "Southern Utah New Construction",
+      headline: "Plumbing Done Right From the Ground Up",
+      subheadline:
+        "Halladay Plumbing partners with builders, GCs, and homeowners on new construction plumbing throughout Southern Utah.",
+      imageAlt: "Plumbing rough-in work at a new construction site",
+    },
+    formId: "new-construction",
+    primaryCTA: { label: "Request a New Construction Quote", type: "form" },
+    reviewFilter: "new-construction",
+    thankYouPath: "/thank-you/new-construction/",
+    tracking: {
+      funnelName: "new_construction",
+      leadType: "new_construction_lead",
+      serviceCategory: "new-construction",
+    },
+    noindex: true,
+  },
 ];
 
 export function getFunnelBySlug(slug: string): ServiceFunnel | undefined {

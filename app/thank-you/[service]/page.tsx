@@ -14,6 +14,7 @@ interface ThankYouConfig {
   nextStep: string;
   serviceId?: string;
   emergency?: boolean;
+  useNewBuildsPhone?: boolean;
 }
 
 const configs: ThankYouConfig[] = [
@@ -60,6 +61,13 @@ const configs: ThankYouConfig[] = [
     serviceId: "emergency-plumbing",
     emergency: true,
   },
+  {
+    slug: "new-construction",
+    headline: "Thanks — your new construction request is in.",
+    nextStep: "We'll follow up to discuss scope, timeline, and next steps for your project.",
+    serviceId: "new-construction",
+    useNewBuildsPhone: true,
+  },
 ];
 
 export function generateStaticParams() {
@@ -99,7 +107,11 @@ export default async function ServiceThankYouPage({ params }: { params: Promise<
         )}
 
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-          <PhoneButton size="lg" emergency={config.emergency} />
+          <PhoneButton
+            size="lg"
+            emergency={config.emergency}
+            phone={config.useNewBuildsPhone ? business.phones.newBuilds : undefined}
+          />
           <CTAButton href="/" size="lg" variant="outline" className="!border-primary !text-primary">
             Back to Home
           </CTAButton>

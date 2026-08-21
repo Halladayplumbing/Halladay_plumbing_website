@@ -21,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "plumbing-maintenance",
     "plumbing-repair",
     "water-treatment",
+    "diamond-club",
     "specials",
     "reviews",
     "about",

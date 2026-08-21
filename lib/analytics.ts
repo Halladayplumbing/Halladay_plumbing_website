@@ -11,6 +11,7 @@
 export type AnalyticsEvent =
   | "phone_click"
   | "emergency_phone_click"
+  | "new_builds_phone_click"
   | "schedule_service_click"
   | "form_view"
   | "form_start"
@@ -23,6 +24,7 @@ export type AnalyticsEvent =
   | "commercial_plumbing_lead"
   | "emergency_plumbing_lead"
   | "plumbing_repair_lead"
+  | "new_construction_lead"
   | "offer_view"
   | "offer_click"
   | "offer_claim"
@@ -58,6 +60,7 @@ export function trackEvent(event: AnalyticsEvent, params: Record<string, unknown
       "commercial_plumbing_lead",
       "emergency_plumbing_lead",
       "plumbing_repair_lead",
+      "new_construction_lead",
     ];
     if (leadEvents.includes(event)) {
       window.fbq("track", "Lead", { content_name: event, ...params });

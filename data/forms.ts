@@ -21,6 +21,8 @@ export interface FormStep {
   title: string;
   helpText?: string;
   options?: StepOption[];
+  /** Contact steps only: show a "Company / Builder Name" field. */
+  showCompanyField?: boolean;
 }
 
 export interface QualificationFormConfig {
@@ -440,6 +442,70 @@ export const forms: QualificationFormConfig[] = [
         type: "contact",
         title: "Name, phone, and address/city",
         helpText: "Calling is the fastest way to reach us for an active emergency.",
+      },
+    ],
+  },
+  {
+    id: "new-construction",
+    serviceId: "new-construction",
+    formName: "New Construction Qualification",
+    ctaText: "Request a New Construction Quote",
+    leadType: "new_construction_lead",
+    defaultPriority: "high",
+    steps: [
+      {
+        id: "project-type",
+        type: "single-select",
+        title: "What type of project is this?",
+        options: [
+          { value: "single-family", label: "Single-family home" },
+          { value: "custom-home", label: "Custom home" },
+          { value: "multi-family", label: "Multi-family / townhomes" },
+          { value: "commercial-development", label: "Commercial development" },
+          { value: "other", label: "Other" },
+        ],
+      },
+      {
+        id: "project-stage",
+        type: "single-select",
+        title: "What stage is the project at?",
+        options: [
+          { value: "pre-construction", label: "Pre-construction / planning" },
+          { value: "foundation", label: "Foundation" },
+          { value: "framing", label: "Framing" },
+          { value: "rough-in-needed", label: "Rough-in plumbing needed" },
+          { value: "finish-trim", label: "Finish / trim-out" },
+          { value: "other", label: "Other" },
+        ],
+      },
+      {
+        id: "role",
+        type: "single-select",
+        title: "Are you a builder, GC, or homeowner?",
+        options: [
+          { value: "builder-gc", label: "Builder / General Contractor" },
+          { value: "homeowner", label: "Homeowner" },
+          { value: "architect-designer", label: "Architect / Designer" },
+          { value: "other", label: "Other" },
+        ],
+      },
+      {
+        id: "timeline",
+        type: "single-select",
+        title: "When do you need plumbing on site?",
+        options: [
+          { value: "asap", label: "As soon as possible" },
+          { value: "30-days", label: "Within 30 days" },
+          { value: "1-3-months", label: "1–3 months" },
+          { value: "planning-ahead", label: "Planning ahead" },
+        ],
+      },
+      {
+        id: "contact",
+        type: "contact",
+        title: "Tell us about your project",
+        helpText: "We'll follow up to discuss scope, timeline, and next steps.",
+        showCompanyField: true,
       },
     ],
   },

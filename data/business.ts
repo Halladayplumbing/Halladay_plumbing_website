@@ -44,6 +44,16 @@ export const business = {
       e164: "",
       enabled: false,
     } as PhoneNumber,
+
+    // Separate line for new-construction / new-build projects (builders,
+    // GCs, new home plumbing systems) — a distinct revenue line from
+    // residential repair/service/emergency, which stays on `main`.
+    // Confirmed by the client (Aug 2026).
+    newBuilds: {
+      display: "435-704-4896",
+      e164: "+14357044896",
+      enabled: true,
+    } as PhoneNumber,
   },
 
   email: "Halladayplumbing@gmail.com",
@@ -61,6 +71,10 @@ export const business = {
   primaryCity: "Cedar City",
   state: "UT",
   serviceRegion: "Southern Utah",
+
+  // "Committed to Quality Since 1994" — printed on Halladay's own Diamond
+  // Club membership materials, confirmed by the client (Aug 2026).
+  foundedYear: 1994,
 
   // Sourced directly from Halladay's live Google Business Profile
   // (confirmed Aug 2026). Re-verify periodically — Google listings can

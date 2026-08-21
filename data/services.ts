@@ -12,7 +12,7 @@ export interface Service {
   slug: string; // used as /{slug}/
   name: string;
   navLabel?: string;
-  category: "plumbing" | "drain-sewer" | "water-systems" | "commercial" | "emergency";
+  category: "plumbing" | "drain-sewer" | "water-systems" | "commercial" | "emergency" | "new-construction";
   shortDescription: string; // used in cards
   outcomeStatement: string; // 1-liner, outcome-driven
   icon: string; // lucide-react icon name
@@ -173,6 +173,20 @@ export const services: Service[] = [
     relatedServices: ["water-softeners"],
     heroImageAlt: "Water treatment system installed in a home mechanical room",
   },
+  {
+    id: "new-construction",
+    slug: "new-construction-plumbing",
+    name: "New Construction Plumbing",
+    navLabel: "New Construction",
+    category: "new-construction",
+    shortDescription:
+      "Rough-in and finish plumbing for new homes and buildings, working directly with builders and homeowners.",
+    outcomeStatement: "Get plumbing done right from the ground up.",
+    icon: "HardHat",
+    funnelSlug: "new-construction",
+    relatedServices: ["commercial-plumbing", "water-softeners"],
+    heroImageAlt: "Plumbing rough-in work at a new construction site",
+  },
 ];
 
 export const serviceCategories: {
@@ -199,6 +213,11 @@ export const serviceCategories: {
     id: "commercial",
     label: "Commercial",
     services: ["commercial-plumbing"],
+  },
+  {
+    id: "new-construction",
+    label: "New Construction",
+    services: ["new-construction"],
   },
 ];
 

@@ -19,6 +19,9 @@ export interface Lead {
     preferredContact?: "phone" | "text" | "email";
     city?: string;
     address?: string;
+    // Builder/GC company name — collected on forms with showCompanyField
+    // (e.g. new construction).
+    company?: string;
   };
 
   service: string; // service id

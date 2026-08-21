@@ -1,14 +1,19 @@
 "use client";
 
 import { Phone } from "lucide-react";
-import { business } from "@/data/business";
-import { trackEvent } from "@/lib/analytics";
+import { business, type PhoneNumber } from "@/data/business";
+import { trackEvent, type AnalyticsEvent } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 
 interface PhoneButtonProps {
   variant?: "primary" | "accent" | "outline" | "ghost";
   size?: "md" | "lg";
   emergency?: boolean;
+  // Explicit phone line to use instead of main/emergency — e.g.
+  // business.phones.newBuilds for the new-construction line. Takes
+  // precedence over `emergency` when provided.
+  phone?: PhoneNumber;
+  trackAs?: AnalyticsEvent;
   className?: string;
   label?: string;
   showIcon?: boolean;
@@ -35,23 +40,23 @@ export function PhoneButton({
   variant = "primary",
   size = "md",
   emergency = false,
+  phone: phoneOverride,
+  trackAs,
   className,
   label,
   showIcon = true,
 }: PhoneButtonProps) {
-  const phone = emergency && business.phones.emergency.enabled ? business.phones.emergency : business.phones.main;
+  const phone =
+    phoneOverride ?? (emergency && business.phones.emergency.enabled ? business.phones.emergency : business.phones.main);
 
   const display = label ?? (emergency ? `Call Emergency Plumbing: ${phone.display}` : `Call ${phone.display}`);
+  const event: AnalyticsEvent = trackAs ?? (emergency ? "emergency_phone_click" : "phone_click");
 
   return (
     <a
       href={`tel:${phone.e164}`}
       className={cn(base, size === "lg" ? sizesLg[variant] : variants[variant], className)}
-      onClick={() =>
-        trackEvent(emergency ? "emergency_phone_click" : "phone_click", {
-          phone_number: phone.display,
-        })
-      }
+      onClick={() => trackEvent(event, { phone_number: phone.display })}
     >
       {showIcon && <Phone className="h-5 w-5 shrink-0" aria-hidden="true" />}
       <span>{display}</span>

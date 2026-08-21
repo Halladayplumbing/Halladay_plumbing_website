@@ -19,9 +19,9 @@ export function OptionCard({
       aria-checked={selected}
       onClick={onClick}
       className={cn(
-        "flex min-h-[52px] w-full items-center justify-between gap-3 rounded-md border-2 px-4 py-3 text-left text-sm font-medium transition-colors duration-150",
+        "flex min-h-[52px] w-full items-center justify-between gap-3 rounded-md border-2 px-4 py-3 text-left text-sm font-medium transition-all duration-150 active:scale-[0.98]",
         selected
-          ? "border-primary bg-primary-light text-primary"
+          ? "border-primary bg-primary-light text-primary scale-[1.01]"
           : "border-border bg-background text-ink hover:border-primary/50",
       )}
     >

@@ -401,6 +401,43 @@ export const servicePageContent: Record<string, ServicePageContent> = {
     faqKey: "emergency-plumbing",
     primaryCtaLabel: "Request Emergency Service",
   },
+  "new-construction": {
+    serviceId: "new-construction",
+    metaTitle: "New Construction Plumbing | Southern Utah Builders",
+    metaDescription:
+      "Halladay Plumbing partners with builders, GCs, and homeowners on new construction plumbing throughout Cedar City and Southern Utah — rough-in through finish.",
+    heroEyebrow: "New Construction",
+    heroHeadline: "Plumbing Done Right From the Ground Up",
+    heroSubheadline:
+      "Halladay Plumbing works with builders, general contractors, and homeowners on new construction plumbing throughout Southern Utah — from rough-in to finish.",
+    heroImageLabel: "Plumbing rough-in work at a new construction site",
+    problemHeadline: "Planning a New Build?",
+    problemBody:
+      "New construction plumbing has to work around a project schedule — framing, inspections, other trades — and get it right the first time, since rework after drywall is expensive. We work directly with builders and homeowners to keep plumbing on schedule.",
+    symptoms: [
+      "Need a plumbing rough-in scheduled around your build timeline",
+      "Coordinating fixture and water heater selections before finish",
+      "Planning ahead for a water softener or treatment system pre-plumb",
+      "Looking for a plumber to partner with across multiple projects",
+    ],
+    explanationHeadline: "Working With Builders and Homeowners",
+    explanationBody: [
+      "We work directly with your project timeline — rough-in, inspections, and finish — and communicate clearly with builders, GCs, and homeowners throughout.",
+      "This is a separate line of work from our residential repair and service calls, so new-build projects get their own dedicated attention and scheduling.",
+    ],
+    benefits: [
+      "Plumbing scheduled around your project timeline",
+      "Direct communication with builders, GCs, and homeowners",
+      "Rough-in through finish, including water heaters and water softener pre-plumb",
+    ],
+    processSteps: [
+      "Tell us about the project and timeline",
+      "We coordinate scope and scheduling with your team",
+      "We complete rough-in and finish plumbing on schedule",
+    ],
+    faqKey: "new-construction",
+    primaryCtaLabel: "Request a New Construction Quote",
+  },
 };
 
 export function getServicePageContent(serviceId: string): ServicePageContent | undefined {

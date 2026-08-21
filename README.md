@@ -34,6 +34,24 @@ All editable business content lives in `/data`, not in components or page JSX:
 | `data/reviews.ts` | Reviews — intentionally empty until real Google reviews are supplied |
 | `data/navigation.ts` | Header/footer nav links |
 | `data/servicePageContent.ts` | Long-form copy for each organic service page |
+| `data/servicePlan.ts` | The Diamond Club™ membership plan — pricing, benefits, add-ons |
+| `data/serviceAreas.ts` | Confirmed towns — each generates a full `/service-areas/{slug}/` page |
+
+### New Construction — a separate revenue line
+
+New construction (builders/GCs/new-home plumbing) is deliberately kept separate from residential
+repair/service/emergency throughout: its own phone number (`business.phones.newBuilds`), its own
+service entry, qualification form, funnel, organic page (`/new-construction-plumbing/`), and its
+own homepage section styled differently from the residential CTAs so it doesn't read as "just
+another service tile."
+
+### Diamond Club membership plan
+
+`/diamond-club/` and the homepage teaser render entirely from `data/servicePlan.ts` — sourced
+directly from Halladay's own plan sheet (front-of-line service, annual inspection, 10% off
+repairs, 2-year service guarantee, manufacturer fixture warranty, $39 member service fee, $9.99/mo,
+plus water heater flush and salt delivery add-ons). Edit that one file to change pricing or
+benefits anywhere they appear.
 
 **To launch a new paid campaign:** add an entry to `data/offers.ts` and `data/funnels.ts`
 (optionally a new entry in `data/forms.ts` if the qualification questions differ). No new
@@ -63,6 +81,15 @@ leads are validated, rate-limited, and logged server-side only (safe local/dev d
 `gtag`, and `fbq` when present. Nothing loads until you set the relevant env var — see
 `.env.example` for `NEXT_PUBLIC_GA4_ID`, `NEXT_PUBLIC_GTM_ID`, `NEXT_PUBLIC_META_PIXEL_ID`,
 `NEXT_PUBLIC_GOOGLE_ADS_ID`.
+
+## Google review sync (optional)
+
+`data/reviews.ts` and the rating/count in `data/business.ts` are currently a manually-captured
+snapshot from Halladay's Google Business Profile. `npm run sync-reviews`
+(`scripts/sync-google-reviews.mjs`) can refresh both automatically from the Google Places API —
+see the comment at the top of that script for setup and cost details, and the delivery notes for
+the tradeoffs (Google caps API-returned review text at 5 reviews regardless of the place's total
+count; the rating/review-count numbers themselves are the real, full aggregate).
 
 ## No fabricated content
 
