@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* --- Brand colors ---------------------------------------------------
+     Derived from Halladay's existing blue/navy plumbing-industry palette.
+     Adjust these three brand values if Halladay supplies exact brand
+     hex codes — every component reads from these tokens. */
+  --color-primary: #0b5fa5;       /* Halladay blue */
+  --color-primary-dark: #08426f;
+  --color-primary-light: #e8f2fb;
+  --color-accent: #f5a623;        /* warm CTA accent */
+  --color-accent-dark: #cf8a12;
+
+  --color-background: #ffffff;
+  --color-surface: #f6f8fa;
+  --color-text: #12202e;
+  --color-muted: #55697a;
+  --color-border: #e1e7ed;
+  --color-success: #1e8e5a;
+  --color-warning: #b5560a;
+  --color-danger: #c0392b;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  --shadow-sm: 0 1px 2px rgba(18, 32, 46, 0.06);
+  --shadow-md: 0 4px 16px rgba(18, 32, 46, 0.08);
+  --shadow-lg: 0 12px 32px rgba(18, 32, 46, 0.12);
+
+  --container-width: 1360px;
+
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --mobile-cta-bar-height: 64px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.container-page {
+  max-width: var(--container-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1rem, 4vw, 2rem);
+  padding-right: clamp(1rem, 4vw, 2rem);
+}
+
+.text-hero {
+  font-size: clamp(2.375rem, 5vw + 1rem, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.text-section-title {
+  font-size: clamp(1.875rem, 2.6vw + 1rem, 3.25rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--color-primary-dark);
+  color: white;
+  padding: 0.75rem 1.25rem;
+  z-index: 100;
+  border-radius: 0 0 var(--radius-sm) 0;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.form-input {
+  width: 100%;
+  min-height: 48px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--color-border);
+  background-color: var(--color-background);
+  padding: 0.625rem 0.875rem;
+  font-size: 1rem;
+  color: var(--color-text);
+  transition: border-color 150ms ease;
+}
+
+.form-input:focus {
+  border-color: var(--color-primary);
+}

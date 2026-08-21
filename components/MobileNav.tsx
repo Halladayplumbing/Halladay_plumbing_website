@@ -1,0 +1,83 @@
+"use client";
+
+import Link from "next/link";
+import { useEffect } from "react";
+import { X } from "lucide-react";
+import { business } from "@/data/business";
+import { mobileNav } from "@/data/navigation";
+import { PhoneButton } from "./PhoneButton";
+import { CTAButton } from "./CTAButton";
+
+export function MobileNav({ open, onClose }: { open: boolean; onClose: () => void }) {
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  useEffect(() => {
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === "Escape") onClose();
+    }
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
+  }, [onClose]);
+
+  if (!open) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 xl:hidden">
+      <button
+        aria-label="Close menu"
+        className="absolute inset-0 bg-ink/50"
+        onClick={onClose}
+      />
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site menu"
+        className="absolute right-0 top-0 flex h-full w-[86%] max-w-sm flex-col bg-background shadow-lg animate-fade-in"
+      >
+        <div className="flex items-center justify-between border-b border-border p-4">
+          <span className="text-base font-bold text-primary">{business.name}</span>
+          <button
+            type="button"
+            className="rounded-md p-2 hover:bg-surface"
+            aria-label="Close menu"
+            onClick={onClose}
+          >
+            <X className="h-6 w-6" aria-hidden="true" />
+          </button>
+        </div>
+
+        <nav aria-label="Mobile" className="flex-1 overflow-y-auto p-4">
+          <ul className="space-y-1">
+            {mobileNav.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  onClick={onClose}
+                  className="block rounded-md px-3 py-3 text-base font-medium text-ink hover:bg-surface"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="space-y-3 border-t border-border p-4">
+          <PhoneButton variant="outline" className="!text-primary !border-primary" size="lg" />
+          <CTAButton href="/contact/" variant="accent" size="lg" className="w-full">
+            Schedule Service
+          </CTAButton>
+        </div>
+      </div>
+    </div>
+  );
+}
