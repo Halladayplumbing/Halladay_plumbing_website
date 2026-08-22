@@ -23,14 +23,13 @@ function isReducedHeaderRoute(pathname: string | null): boolean {
 }
 
 // The reduced header's phone button should match whichever line the rest
-// of that funnel is pushing (new builds, emergency, or the main line) —
-// resolved from the funnel's own serviceId rather than a second hardcoded
-// route check, so it stays correct as funnels are added.
+// of that funnel is pushing (new builds vs. the main line) — resolved
+// from the funnel's own serviceId rather than a second hardcoded route
+// check, so it stays correct as funnels are added.
 function resolveReducedHeaderPhone(pathname: string | null): PhoneNumber | undefined {
   const slug = pathname?.match(/^\/lp\/([^/]+)/)?.[1];
   const funnel = slug ? getFunnelBySlug(slug) : undefined;
   if (funnel?.serviceId === "new-construction") return business.phones.newBuilds;
-  if (funnel?.serviceId === "emergency-plumbing" && business.phones.emergency.enabled) return business.phones.emergency;
   return undefined;
 }
 

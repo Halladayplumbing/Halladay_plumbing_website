@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!area) return {};
   return pageMetadata({
     title: `Plumber in ${area.city}, ${area.state}`,
-    description: `Residential and commercial plumbing services in ${area.city}, ${area.state} from Halladay Plumbing — water softeners, water heaters, drain cleaning, and emergency plumbing.`,
+    description: `Residential and commercial plumbing services in ${area.city}, ${area.state} from Halladay Plumbing — water softeners, water heaters, and drain cleaning.`,
     path: `/service-areas/${area.slug}/`,
   });
 }
@@ -63,7 +63,7 @@ export default async function ServiceAreaPage({ params }: { params: Promise<{ sl
       <PageHero
         eyebrow="Service Area"
         headline={`Plumber in ${area.city}, ${area.state}`}
-        subheadline={`Halladay Plumbing provides residential and commercial plumbing throughout ${area.city} — plumbing repair, water heaters, drain cleaning, water softeners, and emergency plumbing.`}
+        subheadline={`Halladay Plumbing provides residential and commercial plumbing throughout ${area.city} — plumbing repair, water heaters, drain cleaning, and water softeners.`}
         imageLabel={`Halladay Plumbing service work in ${area.city}, ${area.state}`}
         primaryCta={
           <CTAButton href="/contact/" size="lg">

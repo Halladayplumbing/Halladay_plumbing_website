@@ -7,7 +7,6 @@ import { LocalTrustSection } from "@/components/sections/LocalTrustSection";
 import { ProcessSection } from "@/components/sections/ProcessSection";
 import { TestimonialCarousel } from "@/components/TestimonialCarousel";
 import { ServicePlanSection } from "@/components/sections/ServicePlanSection";
-import { EmergencyCTA } from "@/components/sections/EmergencyCTA";
 import { NewConstructionCTA } from "@/components/sections/NewConstructionCTA";
 import { ServiceAreaMap } from "@/components/ServiceAreaMap";
 import { FAQAccordion } from "@/components/FAQAccordion";
@@ -19,7 +18,7 @@ import { getFaqsFor } from "@/data/faqs";
 export const metadata: Metadata = {
   title: "Cedar City Plumber | Residential & Commercial Plumbing",
   description:
-    "Halladay Plumbing provides residential and commercial plumbing in Cedar City and Southern Utah — water softeners, water heaters, drain cleaning, leak repair, and emergency plumbing.",
+    "Halladay Plumbing provides residential and commercial plumbing in Cedar City and Southern Utah — water softeners, water heaters, drain cleaning, and leak repair.",
   alternates: { canonical: "/" },
   openGraph: {
     title: "Halladay Plumbing | Cedar City's Local Plumbing Experts",
@@ -41,7 +40,6 @@ export default function HomePage() {
       <ProcessSection />
       <TestimonialCarousel />
       <ServicePlanSection />
-      <EmergencyCTA />
       <NewConstructionCTA />
 
       <section className="py-16 lg:py-24">

@@ -13,7 +13,6 @@ interface ThankYouConfig {
   headline: string;
   nextStep: string;
   serviceId?: string;
-  emergency?: boolean;
   useNewBuildsPhone?: boolean;
 }
 
@@ -55,13 +54,6 @@ const configs: ThankYouConfig[] = [
     serviceId: "plumbing-repair",
   },
   {
-    slug: "emergency",
-    headline: "Thanks — your emergency request is in.",
-    nextStep: "For the fastest response, please call us now — we're reviewing your request.",
-    serviceId: "emergency-plumbing",
-    emergency: true,
-  },
-  {
     slug: "new-construction",
     headline: "Thanks — your new construction request is in.",
     nextStep: "We'll follow up to discuss scope, timeline, and next steps for your project.",
@@ -100,18 +92,8 @@ export default async function ServiceThankYouPage({ params }: { params: Promise<
         <h1 className="mt-4 text-3xl font-extrabold text-ink">{config.headline}</h1>
         <p className="mt-3 text-ink-muted">{config.nextStep}</p>
 
-        {config.emergency && (
-          <p className="mt-2 font-semibold text-danger">
-            If this is an active emergency, please call now instead of waiting for a callback.
-          </p>
-        )}
-
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-          <PhoneButton
-            size="lg"
-            emergency={config.emergency}
-            phone={config.useNewBuildsPhone ? business.phones.newBuilds : undefined}
-          />
+          <PhoneButton size="lg" phone={config.useNewBuildsPhone ? business.phones.newBuilds : undefined} />
           <CTAButton href="/" size="lg" variant="outline" className="!border-primary !text-primary">
             Back to Home
           </CTAButton>

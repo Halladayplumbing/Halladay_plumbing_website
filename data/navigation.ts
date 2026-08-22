@@ -10,14 +10,13 @@ export interface NavLink {
 // row without horizontal overflow at any desktop/laptop width (1024px+).
 // Water Heaters, Drain Cleaning, and Commercial Plumbing are one click
 // away via the "Plumbing Services" mega-menu instead of duplicated here;
-// Water Softeners and Emergency Plumbing stay top-level given their
+// Water Softeners stays top-level given its
 // business priority. The full list still appears in mobileNav and the
 // footer.
 export const primaryNav: NavLink[] = [
   { label: "Home", href: "/" },
   // "Plumbing Services" renders as a mega-menu driven by data/services.ts
   { label: "Water Softeners", href: "/water-softeners/" },
-  { label: "Emergency Plumbing", href: "/emergency-plumber-cedar-city-ut/" },
   { label: "Service Areas", href: "/service-areas/" },
   { label: "Contact", href: "/contact/" },
 ];
@@ -29,7 +28,6 @@ export const mobileNav: NavLink[] = [
   { label: "Drain Cleaning", href: "/drain-cleaning/" },
   { label: "Leak Repair", href: "/leak-repair/" },
   { label: "Commercial Plumbing", href: "/commercial-plumbing/" },
-  { label: "Emergency Plumbing", href: "/emergency-plumber-cedar-city-ut/" },
   { label: "New Construction", href: "/new-construction-plumbing/" },
   { label: "Diamond Club", href: "/diamond-club/" },
   { label: "Service Areas", href: "/service-areas/" },
@@ -44,7 +42,6 @@ export const footerServiceLinks: NavLink[] = [
   { label: "Water Softeners", href: "/water-softeners/" },
   { label: "Water Heaters", href: "/water-heaters/" },
   { label: "Drain Cleaning", href: "/drain-cleaning/" },
-  { label: "Emergency Plumbing", href: "/emergency-plumber-cedar-city-ut/" },
   { label: "Commercial Plumbing", href: "/commercial-plumbing/" },
   { label: "New Construction", href: "/new-construction-plumbing/" },
 ];

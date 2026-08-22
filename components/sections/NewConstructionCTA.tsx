@@ -3,7 +3,7 @@ import { business } from "@/data/business";
 import { CTAButton } from "@/components/CTAButton";
 import { PhoneButton } from "@/components/PhoneButton";
 
-// Deliberately styled differently from the residential EmergencyCTA
+// Deliberately styled differently from other residential CTAs
 // section (dark neutral instead of red/blue) to read as a distinct line
 // of business — new construction / builder projects — rather than
 // another residential service tile.

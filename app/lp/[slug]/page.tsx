@@ -65,19 +65,13 @@ export default async function LandingPage({ params }: { params: Promise<{ slug: 
       />
 
       <PageHero
-        tone={funnel.serviceId === "emergency-plumbing" ? "emergency" : "default"}
         eyebrow={funnel.hero.eyebrow}
         headline={funnel.hero.headline}
         subheadline={funnel.hero.subheadline}
         imageLabel={funnel.hero.imageAlt}
         primaryCta={
           isPhonePrimary ? (
-            <PhoneButton
-              emergency={funnel.serviceId === "emergency-plumbing"}
-              size="lg"
-              variant="accent"
-              className={funnel.serviceId === "emergency-plumbing" ? "!bg-white !text-danger hover:!bg-white/90" : undefined}
-            />
+            <PhoneButton size="lg" variant="accent" />
           ) : (
             <CTAButton href="#qualify" size="lg" variant="accent" trackAs="schedule_service_click">
               {funnel.primaryCTA.label}
@@ -85,13 +79,7 @@ export default async function LandingPage({ params }: { params: Promise<{ slug: 
           )
         }
         secondaryCta={
-          !isPhonePrimary ? (
-            <PhoneButton
-              size="lg"
-              variant="outline"
-              className={funnel.serviceId === "emergency-plumbing" ? "!border-white !text-white hover:!bg-white/10" : "!border-primary !text-primary"}
-            />
-          ) : undefined
+          !isPhonePrimary ? <PhoneButton size="lg" variant="outline" className="!border-primary !text-primary" /> : undefined
         }
       />
 

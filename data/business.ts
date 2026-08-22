@@ -25,17 +25,6 @@ export const business = {
       enabled: true,
     } as PhoneNumber,
 
-    // Dedicated emergency line. Not yet supplied by Halladay.
-    // Once Halladay provides a number, set display/e164 and flip enabled
-    // to true — every emergency CTA in the site reads from this object
-    // and will switch over automatically, falling back to `main` while
-    // disabled.
-    emergency: {
-      display: "",
-      e164: "",
-      enabled: false,
-    } as PhoneNumber,
-
     // Reserved for call-tracking / dynamic number insertion (CallRail,
     // Google forwarding numbers, etc.) tied to a specific paid campaign.
     // Populate per-campaign once call tracking is configured.
@@ -47,7 +36,7 @@ export const business = {
 
     // Separate line for new-construction / new-build projects (builders,
     // GCs, new home plumbing systems) — a distinct revenue line from
-    // residential repair/service/emergency, which stays on `main`.
+    // residential repair/service, which stays on `main`.
     // Confirmed by the client (Aug 2026).
     newBuilds: {
       display: "435-704-4896",
@@ -91,13 +80,6 @@ export const business = {
       saturday: "Open 24 hours",
       sunday: "Closed",
     },
-  },
-
-  emergencyAvailability: {
-    // Supported by the "Open 24 hours" listing on Halladay's Google
-    // Business Profile (Mon–Sat) — see hours above.
-    confirmed: true,
-    label: "Emergency service available",
   },
 
   socials: {

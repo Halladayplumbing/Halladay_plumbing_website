@@ -7,9 +7,7 @@ export function UtilityBar() {
         <span>
           Serving {business.primaryCity}, {business.state} &amp; {business.serviceRegion}
         </span>
-        {business.emergencyAvailability.confirmed && (
-          <span>{business.emergencyAvailability.label}</span>
-        )}
+        {business.hours.confirmed && <span>{business.hours.display}</span>}
       </div>
     </div>
   );

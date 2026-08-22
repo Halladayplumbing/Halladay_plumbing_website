@@ -1,10 +1,10 @@
 // Unique long-form content for each standard organic service page, keyed
 // by service id. Rendered by components/templates/ServicePageTemplate.tsx.
-// Water Softeners, Emergency Plumbing, and the Cedar City service-area
-// page use their own dedicated page components/templates instead, since
-// they warrant a different structure — this file covers the remaining
-// organic service pages so each still gets genuinely unique copy rather
-// than one template with names swapped.
+// Water Softeners and the Cedar City service-area page use their own
+// dedicated page components/templates instead, since they warrant a
+// different structure — this file covers the remaining organic service
+// pages so each still gets genuinely unique copy rather than one
+// template with names swapped.
 
 export interface ServicePageContent {
   serviceId: string;
@@ -370,36 +370,6 @@ export const servicePageContent: Record<string, ServicePageContent> = {
     ],
     faqKey: "water-softeners",
     primaryCtaLabel: "Get My Water Softener Estimate",
-  },
-  "emergency-plumbing": {
-    serviceId: "emergency-plumbing",
-    metaTitle: "Emergency Plumber in Cedar City, UT",
-    metaDescription:
-      "Emergency plumbing service for Cedar City and Southern Utah — burst pipes, active leaks, sewer backups, and other urgent plumbing issues.",
-    heroEyebrow: "Cedar City Emergency Plumbing",
-    heroHeadline: "Urgent Plumbing Help for Cedar City",
-    heroSubheadline:
-      "Burst pipe, active leak, or sewer backup — call Halladay Plumbing now or request emergency service below.",
-    heroImageLabel: "Plumber responding to an urgent residential plumbing call",
-    problemHeadline: "Dealing With an Urgent Plumbing Issue?",
-    problemBody:
-      "Burst pipes, active leaks, sewer backups, and water heater leaks can cause damage quickly. Calling is the fastest way to reach us for anything urgent.",
-    symptoms: [
-      "Burst or actively leaking pipe",
-      "Sewer or major drain backup",
-      "Overflowing toilet, tub, or sink",
-      "Water heater leak",
-      "Loss of water",
-    ],
-    explanationHeadline: "What Happens Next",
-    explanationBody: [
-      "Call us directly for the fastest response to an active emergency. If you're unable to call, the request form below gets your information to us.",
-      "While you wait, shut off the affected fixture or your main water supply if you can safely do so.",
-    ],
-    benefits: ["Direct line for urgent situations", "Guidance on limiting damage while you wait", "Straightforward assessment once we arrive"],
-    processSteps: ["Call or submit an emergency request", "Tell us what's happening", "We respond to assess and address the issue"],
-    faqKey: "emergency-plumbing",
-    primaryCtaLabel: "Request Emergency Service",
   },
   "new-construction": {
     serviceId: "new-construction",

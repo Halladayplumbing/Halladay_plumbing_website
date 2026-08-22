@@ -150,27 +150,6 @@ export const funnels: ServiceFunnel[] = [
     noindex: true,
   },
   {
-    slug: "emergency-plumber",
-    serviceId: "emergency-plumbing",
-    hero: {
-      eyebrow: "Cedar City Emergency Plumbing",
-      headline: "Urgent Plumbing Help for Cedar City",
-      subheadline:
-        "Burst pipe, active leak, or sewer backup — call Halladay Plumbing now or request emergency service below.",
-      imageAlt: "Plumber responding to an urgent residential plumbing call",
-    },
-    formId: "emergency",
-    primaryCTA: { label: "Call Halladay Plumbing", type: "phone" },
-    reviewFilter: "emergency-plumbing",
-    thankYouPath: "/thank-you/emergency/",
-    tracking: {
-      funnelName: "emergency_plumber",
-      leadType: "emergency_plumbing_lead",
-      serviceCategory: "emergency",
-    },
-    noindex: true,
-  },
-  {
     slug: "commercial-plumbing",
     serviceId: "commercial-plumbing",
     hero: {

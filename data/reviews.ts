@@ -33,7 +33,7 @@ export const reviews: Review[] = [
     author: "Leonard C.",
     rating: 5,
     text: "We heard water running inside a wall, shut off the water and contacted Halladay Plumbing right away. Kyler was at our home within the hour and located and replaced a defective T connector. The guys at Halladay are always professional, helpful and efficient. Their payment system is easy to use and secure. We greatly recommend Halladay Plumbing.",
-    tags: ["leak-repair", "emergency-plumbing"],
+    tags: ["leak-repair"],
     source: "google",
   },
   {

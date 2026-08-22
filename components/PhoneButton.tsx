@@ -8,10 +8,8 @@ import { cn } from "@/lib/utils";
 interface PhoneButtonProps {
   variant?: "primary" | "accent" | "outline" | "ghost";
   size?: "md" | "lg";
-  emergency?: boolean;
-  // Explicit phone line to use instead of main/emergency — e.g.
-  // business.phones.newBuilds for the new-construction line. Takes
-  // precedence over `emergency` when provided.
+  // Explicit phone line to use instead of the main line — e.g.
+  // business.phones.newBuilds for the new-construction line.
   phone?: PhoneNumber;
   trackAs?: AnalyticsEvent;
   className?: string;
@@ -39,22 +37,20 @@ const sizesLg: Record<string, string> = {
 export function PhoneButton({
   variant = "primary",
   size = "md",
-  emergency = false,
   phone: phoneOverride,
   trackAs,
   className,
   label,
   showIcon = true,
 }: PhoneButtonProps) {
-  const phone =
-    phoneOverride ?? (emergency && business.phones.emergency.enabled ? business.phones.emergency : business.phones.main);
+  const phone = phoneOverride ?? business.phones.main;
 
-  const display = label ?? (emergency ? `Call Emergency Plumbing: ${phone.display}` : `Call ${phone.display}`);
+  const display = label ?? `Call ${phone.display}`;
   // "phone_clicked" is the canonical GA4 event name (spec: G-CSMNSQBYHM's
   // event vocabulary); `service` carries which line was called instead
   // of a separate event name per line, so this stays one clean event.
   const event: AnalyticsEvent = trackAs ?? "phone_clicked";
-  const service = phoneOverride === business.phones.newBuilds ? "new-construction" : emergency ? "emergency" : "main";
+  const service = phoneOverride === business.phones.newBuilds ? "new-construction" : "main";
 
   return (
     <a

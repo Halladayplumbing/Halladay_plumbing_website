@@ -53,7 +53,6 @@ export type AnalyticsEvent =
   | "drain_cleaning_lead"
   | "leak_repair_lead"
   | "commercial_plumbing_lead"
-  | "emergency_plumbing_lead"
   | "plumbing_repair_lead"
   | "new_construction_lead"
   // Offers
@@ -90,7 +89,6 @@ export function trackEvent(event: AnalyticsEvent, params: Record<string, unknown
       "drain_cleaning_lead",
       "leak_repair_lead",
       "commercial_plumbing_lead",
-      "emergency_plumbing_lead",
       "plumbing_repair_lead",
       "new_construction_lead",
     ];

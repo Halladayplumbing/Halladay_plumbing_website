@@ -13,7 +13,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   title: "Plumbing Services in Cedar City, UT",
   description:
-    "Full-service residential and commercial plumbing in Cedar City and Southern Utah — plumbing repair, water heaters, water softeners, drain cleaning, and emergency plumbing.",
+    "Full-service residential and commercial plumbing in Cedar City and Southern Utah — plumbing repair, water heaters, water softeners, and drain cleaning.",
   path: "/plumbing-services/",
 });
 
@@ -25,7 +25,7 @@ export default function PlumbingServicesPage() {
       <PageHero
         eyebrow="All Services"
         headline="Plumbing Services for Cedar City & Southern Utah"
-        subheadline="Halladay Plumbing handles residential and commercial plumbing — from everyday repairs to water softener installation and emergency service."
+        subheadline="Halladay Plumbing handles residential and commercial plumbing — from everyday repairs to water softener installation and new construction."
         imageLabel="Halladay Plumbing technician working on residential plumbing"
         primaryCta={
           <CTAButton href="/contact/" size="lg">

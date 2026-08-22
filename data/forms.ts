@@ -11,8 +11,6 @@ export type StepType = "single-select" | "multi-select" | "contact";
 export interface StepOption {
   value: string;
   label: string;
-  /** If true, selecting this option surfaces the emergency phone CTA. */
-  isEmergencyFlag?: boolean;
 }
 
 export interface FormStep {
@@ -137,7 +135,7 @@ export const forms: QualificationFormConfig[] = [
           { value: "no-hot-water", label: "No hot water" },
           { value: "not-enough-hot-water", label: "Not enough hot water" },
           { value: "temp-fluctuates", label: "Temperature fluctuates" },
-          { value: "leaking", label: "Leaking", isEmergencyFlag: true },
+          { value: "leaking", label: "Leaking" },
           { value: "strange-noises", label: "Strange noises" },
           { value: "replacement", label: "Replacement" },
           { value: "interested-tankless", label: "Interested in tankless" },
@@ -171,7 +169,7 @@ export const forms: QualificationFormConfig[] = [
         type: "single-select",
         title: "How urgent is it?",
         options: [
-          { value: "need-now", label: "Need help now", isEmergencyFlag: true },
+          { value: "need-now", label: "Need help now" },
           { value: "today", label: "Today" },
           { value: "within-days", label: "Within several days" },
           { value: "planning-ahead", label: "Planning ahead" },
@@ -208,7 +206,7 @@ export const forms: QualificationFormConfig[] = [
         type: "single-select",
         title: "Is water backing up?",
         options: [
-          { value: "yes", label: "Yes", isEmergencyFlag: true },
+          { value: "yes", label: "Yes" },
           { value: "no", label: "No" },
           { value: "not-sure", label: "Not sure" },
         ],
@@ -218,7 +216,7 @@ export const forms: QualificationFormConfig[] = [
         type: "single-select",
         title: "When do you need help?",
         options: [
-          { value: "immediately", label: "Immediately", isEmergencyFlag: true },
+          { value: "immediately", label: "Immediately" },
           { value: "today", label: "Today" },
           { value: "within-days", label: "Within several days" },
           { value: "flexible", label: "Flexible" },
@@ -245,7 +243,7 @@ export const forms: QualificationFormConfig[] = [
           { value: "water-heater", label: "Water heater" },
           { value: "ceiling-wall", label: "Ceiling/wall" },
           { value: "outdoor", label: "Outdoor plumbing" },
-          { value: "main-line", label: "Main water line", isEmergencyFlag: true },
+          { value: "main-line", label: "Main water line" },
           { value: "not-sure", label: "Not sure" },
         ],
       },
@@ -254,7 +252,7 @@ export const forms: QualificationFormConfig[] = [
         type: "single-select",
         title: "Is water actively flowing?",
         options: [
-          { value: "yes", label: "Yes", isEmergencyFlag: true },
+          { value: "yes", label: "Yes" },
           { value: "no", label: "No" },
           { value: "not-sure", label: "Not sure" },
         ],
@@ -274,7 +272,7 @@ export const forms: QualificationFormConfig[] = [
         type: "single-select",
         title: "When do you need service?",
         options: [
-          { value: "immediately", label: "Immediately", isEmergencyFlag: true },
+          { value: "immediately", label: "Immediately" },
           { value: "today", label: "Today" },
           { value: "within-days", label: "Within several days" },
           { value: "flexible", label: "Flexible" },
@@ -317,7 +315,7 @@ export const forms: QualificationFormConfig[] = [
           { value: "fixture-installation", label: "Fixture installation" },
           { value: "maintenance", label: "Maintenance" },
           { value: "remodel-buildout", label: "Remodel/buildout" },
-          { value: "emergency", label: "Emergency", isEmergencyFlag: true },
+          { value: "emergency", label: "Emergency" },
           { value: "other", label: "Other" },
         ],
       },
@@ -326,7 +324,7 @@ export const forms: QualificationFormConfig[] = [
         type: "single-select",
         title: "Is business operation affected?",
         options: [
-          { value: "yes", label: "Yes", isEmergencyFlag: true },
+          { value: "yes", label: "Yes" },
           { value: "partially", label: "Partially" },
           { value: "no", label: "No" },
         ],
@@ -336,7 +334,7 @@ export const forms: QualificationFormConfig[] = [
         type: "single-select",
         title: "Timeline",
         options: [
-          { value: "emergency", label: "Emergency", isEmergencyFlag: true },
+          { value: "emergency", label: "Emergency" },
           { value: "today", label: "Today" },
           { value: "this-week", label: "This week" },
           { value: "planned", label: "Planned" },
@@ -365,7 +363,7 @@ export const forms: QualificationFormConfig[] = [
           { value: "fixture-repair", label: "Fixture repair" },
           { value: "pipe-repair", label: "Pipe repair" },
           { value: "installation", label: "New installation" },
-          { value: "leak", label: "Leak", isEmergencyFlag: true },
+          { value: "leak", label: "Leak" },
           { value: "maintenance", label: "General maintenance" },
           { value: "not-sure", label: "Not sure — need a diagnosis" },
         ],
@@ -386,63 +384,13 @@ export const forms: QualificationFormConfig[] = [
         type: "single-select",
         title: "When do you need service?",
         options: [
-          { value: "immediately", label: "Immediately", isEmergencyFlag: true },
+          { value: "immediately", label: "Immediately" },
           { value: "today", label: "Today" },
           { value: "within-days", label: "Within several days" },
           { value: "flexible", label: "Flexible" },
         ],
       },
       contactStep,
-    ],
-  },
-  {
-    id: "emergency",
-    serviceId: "emergency-plumbing",
-    formName: "Emergency Plumbing Request",
-    ctaText: "Request Emergency Service",
-    leadType: "emergency_plumbing_lead",
-    defaultPriority: "urgent",
-    steps: [
-      {
-        id: "problem",
-        type: "single-select",
-        title: "What is happening?",
-        options: [
-          { value: "burst-pipe", label: "Burst pipe", isEmergencyFlag: true },
-          { value: "active-leak", label: "Active leak", isEmergencyFlag: true },
-          { value: "sewer-backup", label: "Sewer backup", isEmergencyFlag: true },
-          { value: "overflow", label: "Overflow", isEmergencyFlag: true },
-          { value: "no-water", label: "No water" },
-          { value: "water-heater-leak", label: "Water heater leak", isEmergencyFlag: true },
-          { value: "major-drain-backup", label: "Major drain backup", isEmergencyFlag: true },
-          { value: "other", label: "Other" },
-        ],
-      },
-      {
-        id: "causing-damage",
-        type: "single-select",
-        title: "Is water actively causing damage?",
-        options: [
-          { value: "yes", label: "Yes", isEmergencyFlag: true },
-          { value: "no", label: "No" },
-        ],
-      },
-      {
-        id: "property-type",
-        type: "single-select",
-        title: "Property type",
-        options: [
-          { value: "residential", label: "Residential" },
-          { value: "rental", label: "Rental" },
-          { value: "commercial", label: "Commercial" },
-        ],
-      },
-      {
-        id: "contact",
-        type: "contact",
-        title: "Name, phone, and address/city",
-        helpText: "Calling is the fastest way to reach us for an active emergency.",
-      },
     ],
   },
   {

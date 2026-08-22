@@ -26,7 +26,7 @@ export default function AboutPage() {
               Halladay Plumbing is a local plumbing team working throughout {business.primaryCity}{" "}
               and the surrounding {business.serviceRegion} area, handling residential and
               commercial plumbing — from everyday repairs to water softener installation and
-              emergency plumbing.
+              new construction.
             </p>
             <p className="mt-4 text-ink-muted">
               Being a local company means understanding the water conditions, homes, and

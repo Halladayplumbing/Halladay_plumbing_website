@@ -27,14 +27,6 @@ export function Footer() {
                 {business.phones.main.display}
               </a>
             </li>
-            {business.phones.emergency.enabled && (
-              <li className="flex items-center gap-2">
-                <Phone className="h-4 w-4 shrink-0 text-accent" aria-hidden="true" />
-                <a href={`tel:${business.phones.emergency.e164}`} className="hover:underline">
-                  Emergency: {business.phones.emergency.display}
-                </a>
-              </li>
-            )}
             <li className="flex items-center gap-2">
               <Mail className="h-4 w-4 shrink-0" aria-hidden="true" />
               <a href={`mailto:${business.email}`} className="hover:underline">

@@ -4,7 +4,7 @@ import { CTAButton } from "@/components/CTAButton";
 import { PhoneButton } from "@/components/PhoneButton";
 import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 
-const trustPoints = ["Residential & Commercial", "Local Southern Utah Service"];
+const trustPoints = ["Residential & Commercial", "Local Southern Utah Service", "New Construction Available"];
 
 export function Hero() {
   return (
@@ -32,12 +32,6 @@ export function Hero() {
                 {point}
               </li>
             ))}
-            {business.emergencyAvailability.confirmed && (
-              <li className="flex items-center gap-2 text-sm font-medium text-ink">
-                <CheckCircle2 className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
-                {business.emergencyAvailability.label}
-              </li>
-            )}
           </ul>
         </div>
 

@@ -2,15 +2,14 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
-import { AlertTriangle, ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
 import type { QualificationFormConfig } from "@/data/forms";
 import { ProgressIndicator } from "./ProgressIndicator";
 import { OptionCard } from "./OptionCard";
-import { PhoneButton } from "@/components/PhoneButton";
 import { Button } from "@/components/ui/Button";
 import { trackEvent, type AnalyticsEvent } from "@/lib/analytics";
 import { captureAttribution } from "@/lib/attribution";
-import { submitLead, type Lead, type LeadPriority } from "@/lib/leads";
+import { submitLead, type Lead } from "@/lib/leads";
 import { cn } from "@/lib/utils";
 
 interface QualificationFormProps {
@@ -42,7 +41,6 @@ const leadEventByLeadType: Record<string, AnalyticsEvent> = {
   drain_cleaning_lead: "drain_cleaning_lead",
   leak_repair_lead: "leak_repair_lead",
   commercial_plumbing_lead: "commercial_plumbing_lead",
-  emergency_plumbing_lead: "emergency_plumbing_lead",
   plumbing_repair_lead: "plumbing_repair_lead",
   new_construction_lead: "new_construction_lead",
 };
@@ -62,7 +60,6 @@ export function QualificationForm({ config, offerId, funnelId = "organic", thank
     company: "",
     preferredContact: "phone",
   });
-  const [emergencyFlagged, setEmergencyFlagged] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const started = useRef(false);
@@ -111,24 +108,22 @@ export function QualificationForm({ config, offerId, funnelId = "organic", thank
     }
   }
 
-  function selectSingle(value: string, isEmergencyFlag?: boolean) {
+  function selectSingle(value: string) {
     markStarted();
     setAnswers((prev) => ({ ...prev, [step.id]: value }));
-    if (isEmergencyFlag) setEmergencyFlagged(true);
 
     if (autoAdvanceTimer.current) clearTimeout(autoAdvanceTimer.current);
     const currentStep = step;
     autoAdvanceTimer.current = setTimeout(() => advance(currentStep), AUTO_ADVANCE_MS);
   }
 
-  function toggleMulti(value: string, isEmergencyFlag?: boolean) {
+  function toggleMulti(value: string) {
     markStarted();
     setAnswers((prev) => {
       const current = Array.isArray(prev[step.id]) ? (prev[step.id] as string[]) : [];
       const next = current.includes(value) ? current.filter((v) => v !== value) : [...current, value];
       return { ...prev, [step.id]: next };
     });
-    if (isEmergencyFlag) setEmergencyFlagged(true);
   }
 
   function canAdvance(): boolean {
@@ -161,7 +156,7 @@ export function QualificationForm({ config, offerId, funnelId = "organic", thank
     setSubmitError(null);
 
     const attribution = captureAttribution();
-    const priority: LeadPriority = emergencyFlagged ? "urgent" : config.defaultPriority;
+    const priority = config.defaultPriority;
 
     const lead: Lead = {
       contact: {
@@ -218,16 +213,6 @@ export function QualificationForm({ config, offerId, funnelId = "organic", thank
     <div className="rounded-lg border border-border bg-background p-6 shadow-md sm:p-8">
       <ProgressIndicator step={stepIndex + 1} total={totalSteps} />
 
-      {emergencyFlagged && (
-        <div className="mb-6 flex flex-col gap-3 rounded-md border-2 border-danger bg-danger/5 p-4 sm:flex-row sm:items-center sm:justify-between animate-fade-in">
-          <p className="flex items-center gap-2 text-sm font-semibold text-danger">
-            <AlertTriangle className="h-5 w-5 shrink-0" aria-hidden="true" />
-            This sounds urgent. Calling is the fastest way to reach us.
-          </p>
-          <PhoneButton emergency size="md" variant="accent" />
-        </div>
-      )}
-
       <div className="overflow-hidden">
         <div
           key={stepIndex}
@@ -244,7 +229,7 @@ export function QualificationForm({ config, offerId, funnelId = "organic", thank
                     key={opt.value}
                     label={opt.label}
                     selected={answers[step.id] === opt.value}
-                    onClick={() => selectSingle(opt.value, opt.isEmergencyFlag)}
+                    onClick={() => selectSingle(opt.value)}
                   />
                 ))}
               </div>
@@ -260,7 +245,7 @@ export function QualificationForm({ config, offerId, funnelId = "organic", thank
                       multi
                       label={opt.label}
                       selected={selectedValues.includes(opt.value)}
-                      onClick={() => toggleMulti(opt.value, opt.isEmergencyFlag)}
+                      onClick={() => toggleMulti(opt.value)}
                     />
                   );
                 })}

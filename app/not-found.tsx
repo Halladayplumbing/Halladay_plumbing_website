@@ -6,7 +6,7 @@ const links = [
   { label: "Home", href: "/" },
   { label: "Plumbing Services", href: "/plumbing-services/" },
   { label: "Water Softeners", href: "/water-softeners/" },
-  { label: "Emergency Plumbing", href: "/emergency-plumber-cedar-city-ut/" },
+  { label: "Service Areas", href: "/service-areas/" },
   { label: "Contact", href: "/contact/" },
 ];
 

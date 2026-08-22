@@ -17,11 +17,6 @@ export const faqGroups: Record<string, FAQ[]> = {
         "Halladay Plumbing handles residential and commercial plumbing throughout Cedar City and Southern Utah, including plumbing repair, leak repair, drain cleaning, water heater repair and installation, tankless water heaters, water softener installation, water treatment, and plumbing maintenance.",
     },
     {
-      question: "Does Halladay offer emergency plumbing?",
-      answer:
-        "Yes. For burst pipes, active leaks, sewer backups, and other urgent issues, call Halladay Plumbing directly so we can get details about your situation and respond appropriately.",
-    },
-    {
       question: "Do you install water softeners?",
       answer:
         "Yes, water softener installation is one of our core services. We evaluate your home's water and recommend a system suited to it.",
@@ -197,23 +192,6 @@ export const faqGroups: Record<string, FAQ[]> = {
       question: "Do you handle both repairs and maintenance?",
       answer:
         "Yes, we handle commercial plumbing repairs, maintenance, and installations.",
-    },
-  ],
-  "emergency-plumbing": [
-    {
-      question: "What counts as a plumbing emergency?",
-      answer:
-        "Situations like burst pipes, active leaks, sewer backups, overflowing fixtures, and water heater leaks are all considered plumbing emergencies.",
-    },
-    {
-      question: "What should I do while I wait for help?",
-      answer:
-        "If it's safe to do so, shut off the water at the affected fixture or your main line, move valuables away from the water, and avoid contact with any affected electrical equipment. Then call us.",
-    },
-    {
-      question: "Should I call or fill out the form for an emergency?",
-      answer:
-        "For an active emergency, calling is the fastest way to reach us. The emergency request form is available if you're unable to call.",
     },
   ],
   "plumbing-maintenance": [

@@ -12,7 +12,7 @@ export interface Service {
   slug: string; // used as /{slug}/
   name: string;
   navLabel?: string;
-  category: "plumbing" | "drain-sewer" | "water-systems" | "commercial" | "emergency" | "new-construction";
+  category: "plumbing" | "drain-sewer" | "water-systems" | "commercial" | "new-construction";
   shortDescription: string; // used in cards
   outcomeStatement: string; // 1-liner, outcome-driven
   icon: string; // lucide-react icon name
@@ -98,7 +98,7 @@ export const services: Service[] = [
     offerId: "drain-cleaning-special",
     funnelSlug: "drain-cleaning",
     thankYouSlug: "drain-cleaning",
-    relatedServices: ["emergency-plumbing", "leak-repair"],
+    relatedServices: ["leak-repair"],
     heroImageAlt: "Plumber running a drain cleaning line into a residential drain",
   },
   {
@@ -130,24 +130,8 @@ export const services: Service[] = [
     priority: 5,
     funnelSlug: "leak-repair",
     thankYouSlug: "leak-repair",
-    relatedServices: ["emergency-plumbing", "plumbing-repair"],
+    relatedServices: ["plumbing-repair"],
     heroImageAlt: "Plumber inspecting a pipe leak under a kitchen sink",
-  },
-  {
-    id: "emergency-plumbing",
-    slug: "emergency-plumber-cedar-city-ut",
-    name: "Emergency Plumbing",
-    navLabel: "Emergency Plumbing",
-    category: "emergency",
-    shortDescription: "Urgent help for burst pipes, active leaks, and sewer backups.",
-    outcomeStatement: "Get urgent help before a small problem becomes a big one.",
-    icon: "AlertTriangle",
-    featured: true,
-    priority: 7,
-    funnelSlug: "emergency-plumber",
-    thankYouSlug: "emergency",
-    relatedServices: ["drain-cleaning", "leak-repair"],
-    heroImageAlt: "Plumber responding to an urgent residential plumbing call",
   },
   {
     id: "commercial-plumbing",
@@ -218,7 +202,7 @@ export const serviceCategories: {
   {
     id: "plumbing",
     label: "Plumbing",
-    services: ["plumbing-repair", "leak-repair", "plumbing-maintenance", "emergency-plumbing"],
+    services: ["plumbing-repair", "leak-repair", "plumbing-maintenance"],
   },
   {
     id: "drain-sewer",

@@ -16,7 +16,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "tankless-water-heaters",
     "drain-cleaning",
     "leak-repair",
-    "emergency-plumber-cedar-city-ut",
     "commercial-plumbing",
     "plumbing-maintenance",
     "plumbing-repair",

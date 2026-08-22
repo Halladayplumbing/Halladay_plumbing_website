@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: `%s | ${business.name}`,
   },
   description:
-    "Residential and commercial plumbing throughout Cedar City and Southern Utah — plumbing repair, water heaters, drain cleaning, water softeners, and emergency plumbing.",
+    "Residential and commercial plumbing throughout Cedar City and Southern Utah — plumbing repair, water heaters, drain cleaning, and water softeners.",
   openGraph: {
     type: "website",
     siteName: business.name,
