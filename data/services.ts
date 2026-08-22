@@ -47,7 +47,7 @@ export const services: Service[] = [
     offerId: "water-softener-estimate",
     funnelSlug: "water-softener-installation",
     thankYouSlug: "water-softener",
-    relatedServices: ["water-heaters", "service-areas-cedar-city"],
+    relatedServices: ["water-heaters", "water-treatment"],
     heroImageAlt: "Whole-house water softener system installed in a Cedar City home",
   },
   {

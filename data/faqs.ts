@@ -99,6 +99,28 @@ export const faqGroups: Record<string, FAQ[]> = {
         "It depends on the age and condition of your current system. We can evaluate your existing softener and let you know whether repair or replacement makes more sense.",
     },
   ],
+  "plumbing-repair": [
+    {
+      question: "How do I know if a plumbing problem needs a professional?",
+      answer:
+        "A slow drip, a running toilet, or a fixture that's harder to operate than it should be are all worth having looked at — small issues like these tend to get more expensive to fix the longer they're left alone.",
+    },
+    {
+      question: "Can you diagnose a problem before recommending a repair?",
+      answer:
+        "Yes. We inspect the fixture or line first to identify the actual cause, then explain the recommended repair before any work begins.",
+    },
+    {
+      question: "Do you repair both fixtures and pipes?",
+      answer:
+        "Yes, we handle general plumbing repairs across fixtures, supply lines, and drain lines for residential and commercial properties.",
+    },
+    {
+      question: "What if the repair reveals a bigger issue?",
+      answer:
+        "We'll explain what we find and walk through your options before doing any additional work — no surprise repairs without your sign-off.",
+    },
+  ],
   "water-heaters": [
     {
       question: "How do I know if I need a repair or a replacement?",

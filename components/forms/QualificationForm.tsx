@@ -149,6 +149,10 @@ export function QualificationForm({ config, offerId, funnelId = "organic", thank
   }
 
   async function handleSubmit() {
+    // Synchronous re-entrancy guard: `submitting` state only disables the
+    // button once React re-renders, which isn't fast enough to rule out
+    // two click/tap events landing before that commits.
+    if (submitting) return;
     setSubmitting(true);
     setSubmitError(null);
 

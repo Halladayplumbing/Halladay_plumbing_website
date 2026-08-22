@@ -46,7 +46,7 @@ export function WaterSoftenerFeature() {
           </ul>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <CTAButton href="/contact/?service=water-softener" size="lg" variant="primary">
+            <CTAButton href="/contact/?service=water-softeners" size="lg" variant="primary">
               Get a Water Softener Estimate
             </CTAButton>
             <CTAButton href="/water-softeners/" size="lg" variant="outline" className="!border-primary !text-primary">

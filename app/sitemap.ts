@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { services } from "@/data/services";
+import { services, getServiceBySlug } from "@/data/services";
 import { getActiveServiceAreas } from "@/data/serviceAreas";
 import { SITE_URL } from "@/lib/utils";
 
@@ -28,12 +28,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "contact",
   ];
 
-  const entries: MetadataRoute.Sitemap = staticPaths.map((path) => ({
-    url: `${SITE_URL}/${path ? `${path}/` : ""}`,
-    lastModified: new Date(),
-    changeFrequency: path === "" ? "weekly" : "monthly",
-    priority: path === "" ? 1 : path === "water-softeners" ? 0.9 : 0.7,
-  }));
+  // Sitemap priority for a service page tracks data/services.ts's own
+  // `priority` field (lower number = higher-ranked) rather than a
+  // hardcoded slug string, so it stays correct if the top-priority
+  // service ever changes.
+  const entries: MetadataRoute.Sitemap = staticPaths.map((path) => {
+    const service = path ? getServiceBySlug(path) : undefined;
+    const priority = path === "" ? 1 : service?.priority === 1 ? 0.9 : 0.7;
+    return {
+      url: `${SITE_URL}/${path ? `${path}/` : ""}`,
+      lastModified: new Date(),
+      changeFrequency: path === "" ? "weekly" : "monthly",
+      priority,
+    };
+  });
 
   for (const area of getActiveServiceAreas()) {
     entries.push({

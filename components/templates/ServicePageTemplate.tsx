@@ -150,7 +150,7 @@ export function ServicePageTemplate({ service, content }: { service: Service; co
 
       <WhyHalladayInline />
       <ReviewsGrid tag={service.id} />
-      <RelatedServices serviceIds={service.relatedServices.filter((id) => id !== "service-areas-cedar-city")} />
+      <RelatedServices serviceIds={service.relatedServices} />
 
       <section className="border-t border-border py-10">
         <div className="container-page text-sm text-ink-muted">

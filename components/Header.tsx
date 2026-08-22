@@ -7,17 +7,31 @@ import { ChevronDown, Menu } from "lucide-react";
 import { business } from "@/data/business";
 import { primaryNav } from "@/data/navigation";
 import { serviceCategories, getServiceById } from "@/data/services";
+import { getFunnelBySlug } from "@/data/funnels";
 import { PhoneButton } from "./PhoneButton";
 import { CTAButton } from "./CTAButton";
 import { MobileNav } from "./MobileNav";
 import { UtilityBar } from "./UtilityBar";
 import { cn } from "@/lib/utils";
+import type { PhoneNumber } from "@/data/business";
 
 // Paid landing pages (/lp/...) use a reduced header — logo and a call
 // button only, no full nav/mega-menu — to reduce escape paths and keep
 // visitors focused on the funnel's single conversion action.
 function isReducedHeaderRoute(pathname: string | null): boolean {
   return Boolean(pathname?.startsWith("/lp/"));
+}
+
+// The reduced header's phone button should match whichever line the rest
+// of that funnel is pushing (new builds, emergency, or the main line) —
+// resolved from the funnel's own serviceId rather than a second hardcoded
+// route check, so it stays correct as funnels are added.
+function resolveReducedHeaderPhone(pathname: string | null): PhoneNumber | undefined {
+  const slug = pathname?.match(/^\/lp\/([^/]+)/)?.[1];
+  const funnel = slug ? getFunnelBySlug(slug) : undefined;
+  if (funnel?.serviceId === "new-construction") return business.phones.newBuilds;
+  if (funnel?.serviceId === "emergency-plumbing" && business.phones.emergency.enabled) return business.phones.emergency;
+  return undefined;
 }
 
 export function Header() {
@@ -46,6 +60,7 @@ export function Header() {
   }, []);
 
   if (reduced) {
+    const reducedPhone = resolveReducedHeaderPhone(pathname);
     return (
       <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur">
         <div className="container-page flex h-16 items-center justify-between gap-3 lg:h-20">
@@ -56,7 +71,8 @@ export function Header() {
             variant="primary"
             size="md"
             className="whitespace-nowrap !px-3 sm:!px-5"
-            label={business.phones.main.display}
+            phone={reducedPhone}
+            label={(reducedPhone ?? business.phones.main).display}
           />
         </div>
       </header>
