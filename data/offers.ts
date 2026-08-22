@@ -47,14 +47,14 @@ export interface Offer {
 export const offers: Offer[] = [
   {
     id: "water-softener-estimate",
-    name: "Water Softener Free Estimate",
+    name: "Water Softener Assessment",
     services: ["water-softeners"],
     campaigns: ["water-softener-installation"],
     eyebrow: "Water Softeners",
-    headline: "Get a Free Water Softener Estimate",
+    headline: "Request a Water Softener Assessment",
     description:
       "Placeholder offer — replace with an approved promotion (installation credit, dollar amount off, bundled service, etc.) before launch.",
-    ctaText: "Get My Water Softener Estimate",
+    ctaText: "Request My Hard Water Assessment",
     terms: "PLACEHOLDER — replace with approved terms before activating.",
     active: false,
     trackingId: "offer_water_softener_estimate",

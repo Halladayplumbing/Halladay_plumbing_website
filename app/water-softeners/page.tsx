@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { CheckCircle2, Droplets } from "lucide-react";
 import { getActiveOfferForService } from "@/data/offers";
-import { getFormById } from "@/data/forms";
 import { getFaqsFor } from "@/data/faqs";
 import { getPrimaryServiceArea, getActiveServiceAreas } from "@/data/serviceAreas";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
@@ -9,7 +8,7 @@ import { PageHero } from "@/components/sections/PageHero";
 import { CTAButton } from "@/components/CTAButton";
 import { PhoneButton } from "@/components/PhoneButton";
 import { OfferCard } from "@/components/OfferCard";
-import { QualificationForm } from "@/components/forms/QualificationForm";
+import { WaterSoftenerConversionFlow } from "@/components/conversion/WaterSoftenerConversionFlow";
 import { TrackPageView } from "@/components/TrackPageView";
 import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 import { WhyHalladayInline } from "@/components/sections/WhyHalladayInline";
@@ -59,7 +58,6 @@ const installSteps = [
 export default function WaterSoftenersPage() {
   const offer = getActiveOfferForService("water-softeners");
   const primaryArea = getPrimaryServiceArea();
-  const form = getFormById("water-softener")!;
   const secondaryAreaNames = getActiveServiceAreas()
     .filter((a) => !a.isPrimary)
     .map((a) => a.city)
@@ -86,7 +84,7 @@ export default function WaterSoftenersPage() {
         imageLabel="Whole-house water softener system installed in a Cedar City home"
         primaryCta={
           <CTAButton href="#qualify" size="lg">
-            Get a Water Softener Estimate
+            See If Your Home Qualifies
           </CTAButton>
         }
         secondaryCta={<PhoneButton size="lg" variant="outline" className="!border-primary !text-primary" />}
@@ -180,12 +178,13 @@ export default function WaterSoftenersPage() {
 
       <section id="qualify" className="scroll-mt-24 bg-surface py-14 lg:py-20">
         <div className="container-page mx-auto max-w-xl">
-          <h2 className="text-center text-2xl font-extrabold text-ink sm:text-3xl">Get My Water Softener Estimate</h2>
+          <h2 className="text-center text-2xl font-extrabold text-ink sm:text-3xl">60-Second Hard Water Signs Check</h2>
           <p className="mt-2 text-center text-ink-muted">
-            Tell us a bit about your home and we&apos;ll follow up with a recommendation.
+            Answer a few quick questions to see what your home&apos;s signs suggest — no name, phone, or
+            email required to see your result.
           </p>
           <div className="mt-8">
-            <QualificationForm config={form} offerId={offer?.id} funnelId="organic" thankYouPath="/thank-you/water-softener/" />
+            <WaterSoftenerConversionFlow />
           </div>
         </div>
       </section>

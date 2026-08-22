@@ -1,27 +1,27 @@
-import { MessageSquare, MapPin, ClipboardList, CalendarClock } from "lucide-react";
+import { History, ClipboardList, Wrench, LifeBuoy } from "lucide-react";
 import { business } from "@/data/business";
 import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 
 const pillars = [
   {
-    icon: MessageSquare,
-    title: "Clear Communication",
-    body: "You'll know what's wrong, what it takes to fix it, and what to expect before work begins.",
+    icon: History,
+    title: `Local Experience Since ${business.foundedYear}`,
+    body: "Decades of plumbing experience serving Southern Utah homes.",
   },
   {
     icon: ClipboardList,
-    title: "Straightforward Recommendations",
-    body: "Recommendations are based on what your home actually needs.",
+    title: "Recommendations Based on Your Home",
+    body: "Halladay evaluates the household and existing system before recommending equipment.",
   },
   {
-    icon: MapPin,
-    title: "Local Accountability",
-    body: "Halladay Plumbing is based in Cedar City and works throughout Southern Utah.",
+    icon: Wrench,
+    title: "Professionally Installed",
+    body: "Sizing, supply, installation, and setup are handled professionally.",
   },
   {
-    icon: CalendarClock,
-    title: "Reliable Scheduling",
-    body: "We respect your time and your property throughout the job.",
+    icon: LifeBuoy,
+    title: "Support After Installation",
+    body: "Halladay remains available for ongoing plumbing, maintenance, and water-treatment needs.",
   },
 ];
 
@@ -30,7 +30,7 @@ export function LocalTrustSection() {
     <section className="py-16 lg:py-24">
       <div className="container-page">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-section-title font-extrabold text-ink">Plumbing Done Right From the Start</h2>
+          <h2 className="text-section-title font-extrabold text-ink">Why Southern Utah Homeowners Choose Halladay</h2>
         </div>
 
         <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -50,14 +50,15 @@ export function LocalTrustSection() {
               A Local Plumbing Company Serving Southern Utah
             </h2>
             <p className="mt-4 text-ink-muted">
-              Halladay Plumbing is a local team working throughout {business.primaryCity} and the
-              surrounding {business.serviceRegion} area. Being local means understanding the water
-              conditions, homes, and businesses here — and being accountable to the community we
-              work in.
+              Halladay Plumbing has served {business.primaryCity} and the surrounding{" "}
+              {business.serviceRegion} area since {business.foundedYear}. Being local means
+              understanding the water conditions, homes, and businesses here — and being
+              accountable to the community we work in.
             </p>
             <p className="mt-4 text-ink-muted">
-              We&apos;d rather explain the plumbing problem in plain language and recommend the
-              right fix than push something your home doesn&apos;t need.
+              Halladay diagnoses first, recommends the appropriate solution for the individual
+              home, and stays available after the work is done — rather than pushing something
+              your home doesn&apos;t need.
             </p>
           </div>
         </div>

@@ -19,8 +19,9 @@ interface ThankYouConfig {
 const configs: ThankYouConfig[] = [
   {
     slug: "water-softener",
-    headline: "Thanks — your water softener request is in.",
-    nextStep: "We'll follow up to schedule your in-home water evaluation and estimate.",
+    headline: "Request Received",
+    nextStep:
+      "Your information has been sent to Halladay Plumbing. A member of the team will contact you to review your request and confirm scheduling.",
     serviceId: "water-softeners",
   },
   {

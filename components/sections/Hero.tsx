@@ -4,7 +4,7 @@ import { CTAButton } from "@/components/CTAButton";
 import { PhoneButton } from "@/components/PhoneButton";
 import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 
-const trustPoints = ["Residential & Commercial", "Local Southern Utah Service", "New Construction Available"];
+const trustPoints = ["Residential & Commercial", "New Construction Available"];
 
 export function Hero() {
   return (
@@ -26,6 +26,10 @@ export function Hero() {
           </div>
 
           <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2">
+            <li className="flex items-center gap-2 text-sm font-medium text-ink">
+              <CheckCircle2 className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+              Serving Southern Utah Since {business.foundedYear}
+            </li>
             {trustPoints.map((point) => (
               <li key={point} className="flex items-center gap-2 text-sm font-medium text-ink">
                 <CheckCircle2 className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />

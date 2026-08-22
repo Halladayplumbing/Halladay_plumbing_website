@@ -51,7 +51,7 @@ export const forms: QualificationFormConfig[] = [
     id: "water-softener",
     serviceId: "water-softeners",
     formName: "Water Softener Qualification",
-    ctaText: "Get My Water Softener Estimate",
+    ctaText: "Request My Hard Water Assessment",
     leadType: "water_softener_lead",
     defaultPriority: "high",
     steps: [

@@ -82,6 +82,13 @@ export const business = {
     },
   },
 
+  // Halladay's real, live Housecall Pro online-booking page (found via
+  // Halladay's public listings, not a client-supplied embed/API — no
+  // embeddable widget/script is available, only this hosted URL). Booking
+  // through it is a MANUAL process on Halladay's end: submitting it does
+  // not confirm an appointment time. See components/conversion/BookingLauncher.tsx.
+  housecallProUrl: "https://book.housecallpro.com/book/Halladay-Plumbing/c252c8eec8aa4fac898b1f853f7f7368",
+
   socials: {
     facebook: "https://www.facebook.com/halladayplumbing",
     instagram: "https://www.instagram.com/halladayplumbing",

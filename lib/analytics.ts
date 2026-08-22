@@ -47,6 +47,22 @@ export type AnalyticsEvent =
   | "booking_started"
   | "booking_completed"
   | "booking_step_completed"
+  // 60-Second Hard Water Signs Check (components/conversion/HardWaterSignsCheck.tsx)
+  | "hard_water_check_started"
+  | "hard_water_check_step_completed"
+  | "hard_water_check_completed"
+  | "hard_water_result_low"
+  | "hard_water_result_medium"
+  | "hard_water_result_high"
+  // Offer Eligibility (components/conversion/OfferEligibility.tsx)
+  | "offer_eligibility_started"
+  | "offer_eligibility_completed"
+  | "offer_not_qualified"
+  // Water Protection Package / assessment request
+  | "assessment_request_started"
+  // Housecall Pro manual-booking launcher (components/conversion/BookingLauncher.tsx)
+  | "housecallpro_opened"
+  | "request_service_clicked"
   // Leads by service
   | "water_softener_lead"
   | "water_heater_lead"
