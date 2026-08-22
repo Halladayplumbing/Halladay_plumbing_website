@@ -47,7 +47,7 @@ export const funnels: ServiceFunnel[] = [
       eyebrow: "Cedar City Water Softener Installation",
       headline: "Protect Your Home From Southern Utah's Hard Water",
       subheadline:
-        "Halladay Plumbing installs whole-house water softener systems for Cedar City homes. Tell us about your home and get a personalized estimate.",
+        "Halladay Plumbing installs whole-house water softener systems for homeowners throughout Cedar City and Southern Utah. Tell us about your home and get a personalized estimate.",
       imageAlt: "Water softener system installed in a Cedar City home mechanical room",
     },
     offerId: "water-softener-estimate",

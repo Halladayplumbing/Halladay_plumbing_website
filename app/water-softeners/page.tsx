@@ -1,14 +1,16 @@
+import Link from "next/link";
 import { CheckCircle2, Droplets } from "lucide-react";
 import { getActiveOfferForService } from "@/data/offers";
 import { getFormById } from "@/data/forms";
 import { getFaqsFor } from "@/data/faqs";
-import { getPrimaryServiceArea } from "@/data/serviceAreas";
+import { getPrimaryServiceArea, getActiveServiceAreas } from "@/data/serviceAreas";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { PageHero } from "@/components/sections/PageHero";
 import { CTAButton } from "@/components/CTAButton";
 import { PhoneButton } from "@/components/PhoneButton";
 import { OfferCard } from "@/components/OfferCard";
 import { QualificationForm } from "@/components/forms/QualificationForm";
+import { TrackPageView } from "@/components/TrackPageView";
 import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 import { WhyHalladayInline } from "@/components/sections/WhyHalladayInline";
 import { ReviewsGrid } from "@/components/ReviewsGrid";
@@ -58,9 +60,15 @@ export default function WaterSoftenersPage() {
   const offer = getActiveOfferForService("water-softeners");
   const primaryArea = getPrimaryServiceArea();
   const form = getFormById("water-softener")!;
+  const secondaryAreaNames = getActiveServiceAreas()
+    .filter((a) => !a.isPrimary)
+    .map((a) => a.city)
+    .join(", ");
 
   return (
     <>
+      <TrackPageView event="water_softener_page_view" params={{ page: "/water-softeners/" }} />
+
       <StructuredData
         data={serviceSchema({
           name: "Water Softener Installation",
@@ -74,7 +82,7 @@ export default function WaterSoftenersPage() {
       <PageHero
         eyebrow="Water Softener Installation"
         headline={`Water Softener Installation in ${primaryArea.city}, ${primaryArea.state}`}
-        subheadline="Hard water takes a toll on your appliances, fixtures, faucets, showers, and water heater over time. A properly installed water softener protects your home's plumbing system at the source."
+        subheadline="Hard water takes a toll on your appliances, fixtures, faucets, showers, and water heater over time. Serving homeowners throughout Cedar City and Southern Utah, Halladay Plumbing installs a properly sized water softener to protect your home's plumbing system at the source."
         imageLabel="Whole-house water softener system installed in a Cedar City home"
         primaryCta={
           <CTAButton href="#qualify" size="lg">
@@ -189,10 +197,10 @@ export default function WaterSoftenersPage() {
       <section className="border-t border-border py-10">
         <div className="container-page text-sm text-ink-muted">
           Proudly installing water softeners in{" "}
-          <a href={`/service-areas/${primaryArea.slug}/`} className="font-semibold text-primary hover:underline">
+          <Link href="/service-areas/" className="font-semibold text-primary hover:underline">
             {primaryArea.city}, {primaryArea.state}
-          </a>{" "}
-          and the surrounding Southern Utah area.
+          </Link>
+          , {secondaryAreaNames} and surrounding Southern Utah communities.
         </div>
       </section>
 

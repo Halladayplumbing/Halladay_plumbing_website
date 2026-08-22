@@ -17,8 +17,17 @@ import { StructuredData } from "@/components/StructuredData";
 import { localBusinessSchema } from "@/lib/schema";
 import { pageMetadata } from "@/lib/seo";
 
+// Only areas with real, unique local content get a standalone page —
+// see the note in data/serviceAreas.ts. Every other confirmed area is
+// still real and served; it's just reached via the /service-areas/ hub
+// and routes straight into the request-service flow instead of a thin
+// auto-generated page.
+export const dynamicParams = false;
+
 export function generateStaticParams() {
-  return getActiveServiceAreas().map((a) => ({ slug: a.slug }));
+  return getActiveServiceAreas()
+    .filter((a) => a.hasDedicatedPage)
+    .map((a) => ({ slug: a.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -35,7 +44,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function ServiceAreaPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const area = getServiceAreaBySlug(slug);
-  if (!area) notFound();
+  if (!area || !area.hasDedicatedPage) notFound();
 
   const featured = getFeaturedServices();
 
@@ -46,7 +55,7 @@ export default async function ServiceAreaPage({ params }: { params: Promise<{ sl
       <Breadcrumbs
         items={[
           { label: "Home", href: "/" },
-          { label: "Service Areas", href: "/service-areas/cedar-city-ut/" },
+          { label: "Service Areas", href: "/service-areas/" },
           { label: `${area.city}, ${area.state}`, href: `/service-areas/${area.slug}/` },
         ]}
       />

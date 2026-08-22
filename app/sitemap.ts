@@ -22,6 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "plumbing-repair",
     "water-treatment",
     "diamond-club",
+    "service-areas",
     "specials",
     "reviews",
     "about",
@@ -43,7 +44,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     };
   });
 
-  for (const area of getActiveServiceAreas()) {
+  // Only areas with a real dedicated page are indexable routes — every
+  // other confirmed area is listed on the /service-areas/ hub instead
+  // (see data/serviceAreas.ts and app/service-areas/[slug]/page.tsx).
+  for (const area of getActiveServiceAreas().filter((a) => a.hasDedicatedPage)) {
     entries.push({
       url: `${SITE_URL}/service-areas/${area.slug}/`,
       lastModified: new Date(),

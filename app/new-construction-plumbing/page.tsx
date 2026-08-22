@@ -47,7 +47,6 @@ export default function NewConstructionPage() {
         primaryCta={
           <PhoneButton
             phone={business.phones.newBuilds}
-            trackAs="new_builds_phone_click"
             size="lg"
             label={`Call New Builds: ${business.phones.newBuilds.display}`}
           />
@@ -146,7 +145,6 @@ export default function NewConstructionPage() {
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
             <PhoneButton
               phone={business.phones.newBuilds}
-              trackAs="new_builds_phone_click"
               size="lg"
               variant="accent"
               label={`Call ${business.phones.newBuilds.display}`}

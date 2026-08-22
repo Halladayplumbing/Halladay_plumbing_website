@@ -13,6 +13,7 @@ import { CTAButton } from "@/components/CTAButton";
 import { PhoneButton } from "@/components/PhoneButton";
 import { OfferCard } from "@/components/OfferCard";
 import { QualificationForm } from "@/components/forms/QualificationForm";
+import { TrackPageView } from "@/components/TrackPageView";
 import { WhyHalladayInline } from "@/components/sections/WhyHalladayInline";
 import { ReviewsGrid } from "@/components/ReviewsGrid";
 import { FAQAccordion } from "@/components/FAQAccordion";
@@ -52,6 +53,9 @@ export default async function LandingPage({ params }: { params: Promise<{ slug: 
 
   return (
     <>
+      <TrackPageView event="landing_page_view" params={{ funnel: funnel.slug, service: funnel.serviceId }} />
+      {funnel.serviceId === "water-softeners" && <TrackPageView event="water_softener_page_view" params={{ funnel: funnel.slug }} />}
+
       <StructuredData
         data={serviceSchema({
           name: service.name,

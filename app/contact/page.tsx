@@ -22,11 +22,15 @@ const points = [
 export default async function ContactPage({
   searchParams,
 }: {
-  searchParams: Promise<{ service?: string; offer?: string }>;
+  searchParams: Promise<{ service?: string; offer?: string; city?: string }>;
 }) {
   const params = await searchParams;
   const service = params.service ? getServiceById(params.service) : undefined;
   const offer = resolveOfferFromQueryParam(params.offer);
+  // City comes from the service-area checker/hub for towns without a
+  // dedicated page — sanitized to a short plain string, never rendered
+  // as HTML, just pre-filled into the form's city field.
+  const city = params.city?.slice(0, 100);
 
   return (
     <>
@@ -39,8 +43,9 @@ export default async function ContactPage({
               {service ? `Schedule ${service.name}` : "Schedule Service"}
             </h1>
             <p className="mt-4 text-lg text-ink-muted">
-              Tell us a bit about what you need and we&apos;ll follow up to confirm details and
-              schedule your service.
+              {city
+                ? `Tell us a bit about what you need in ${city} and we'll follow up to confirm details and schedule your service.`
+                : "Tell us a bit about what you need and we'll follow up to confirm details and schedule your service."}
             </p>
 
             {offer && (
@@ -73,7 +78,7 @@ export default async function ContactPage({
           </div>
 
           <div className="rounded-lg border border-border bg-background p-6 shadow-md sm:p-8">
-            <ContactForm initialServiceId={service?.id} initialOfferId={offer?.id} />
+            <ContactForm initialServiceId={service?.id} initialOfferId={offer?.id} initialCity={city} />
           </div>
         </div>
       </section>

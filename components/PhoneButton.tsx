@@ -50,13 +50,17 @@ export function PhoneButton({
     phoneOverride ?? (emergency && business.phones.emergency.enabled ? business.phones.emergency : business.phones.main);
 
   const display = label ?? (emergency ? `Call Emergency Plumbing: ${phone.display}` : `Call ${phone.display}`);
-  const event: AnalyticsEvent = trackAs ?? (emergency ? "emergency_phone_click" : "phone_click");
+  // "phone_clicked" is the canonical GA4 event name (spec: G-CSMNSQBYHM's
+  // event vocabulary); `service` carries which line was called instead
+  // of a separate event name per line, so this stays one clean event.
+  const event: AnalyticsEvent = trackAs ?? "phone_clicked";
+  const service = phoneOverride === business.phones.newBuilds ? "new-construction" : emergency ? "emergency" : "main";
 
   return (
     <a
       href={`tel:${phone.e164}`}
       className={cn(base, size === "lg" ? sizesLg[variant] : variants[variant], className)}
-      onClick={() => trackEvent(event, { phone_number: phone.display })}
+      onClick={() => trackEvent(event, { service, phone_number: phone.display })}
     >
       {showIcon && <Phone className="h-5 w-5 shrink-0" aria-hidden="true" />}
       <span>{display}</span>

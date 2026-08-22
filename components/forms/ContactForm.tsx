@@ -12,9 +12,10 @@ import { submitLead, type Lead } from "@/lib/leads";
 interface ContactFormProps {
   initialServiceId?: string;
   initialOfferId?: string;
+  initialCity?: string;
 }
 
-export function ContactForm({ initialServiceId, initialOfferId }: ContactFormProps) {
+export function ContactForm({ initialServiceId, initialOfferId, initialCity }: ContactFormProps) {
   const router = useRouter();
   const [values, setValues] = useState({
     firstName: "",
@@ -22,7 +23,7 @@ export function ContactForm({ initialServiceId, initialOfferId }: ContactFormPro
     phone: "",
     email: "",
     service: initialServiceId ?? "",
-    city: "",
+    city: initialCity ?? "",
     preferredContact: "phone" as "phone" | "text" | "email",
     message: "",
     // Honeypot field — real users never see or fill this. Bots that

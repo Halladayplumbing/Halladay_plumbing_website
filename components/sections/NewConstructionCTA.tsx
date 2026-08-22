@@ -26,7 +26,6 @@ export function NewConstructionCTA() {
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <PhoneButton
               phone={business.phones.newBuilds}
-              trackAs="new_builds_phone_click"
               size="lg"
               variant="accent"
               label={`Call New Builds: ${business.phones.newBuilds.display}`}

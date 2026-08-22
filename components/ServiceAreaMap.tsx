@@ -1,6 +1,6 @@
 import { MapPin } from "lucide-react";
 import Link from "next/link";
-import { getActiveServiceAreas } from "@/data/serviceAreas";
+import { getActiveServiceAreas, getServiceAreaHref } from "@/data/serviceAreas";
 import { business } from "@/data/business";
 
 // Live Google Maps embed (no API key required — uses Google's public
@@ -37,7 +37,7 @@ export function ServiceAreaMap() {
           {areas.map((area) => (
             <li key={area.slug}>
               <Link
-                href={`/service-areas/${area.slug}/`}
+                href={getServiceAreaHref(area)}
                 className="flex items-center gap-2 text-sm font-medium text-ink hover:text-primary"
               >
                 <MapPin className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />

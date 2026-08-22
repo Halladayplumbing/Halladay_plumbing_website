@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { MapPin } from "lucide-react";
-import { getActiveServiceAreas } from "@/data/serviceAreas";
+import { getActiveServiceAreas, getServiceAreaHref } from "@/data/serviceAreas";
 
 export function ServiceAreaGrid() {
   const areas = getActiveServiceAreas();
@@ -21,7 +21,7 @@ export function ServiceAreaGrid() {
           {areas.map((area) => (
             <Link
               key={area.slug}
-              href={`/service-areas/${area.slug}/`}
+              href={getServiceAreaHref(area)}
               className="flex items-center gap-3 rounded-lg border border-border bg-background p-5 shadow-sm transition-shadow hover:shadow-md"
             >
               <MapPin className="h-5 w-5 shrink-0 text-primary" aria-hidden="true" />

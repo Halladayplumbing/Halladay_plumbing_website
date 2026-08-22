@@ -91,6 +91,10 @@ export function QualificationForm({ config, offerId, funnelId = "organic", thank
     if (started.current) return;
     started.current = true;
     trackEvent("form_start", { form_id: config.id, service: config.serviceId });
+    trackEvent("qualifier_started", { form_id: config.id, service: config.serviceId });
+    if (config.serviceId === "water-softeners") {
+      trackEvent("water_softener_assessment_started", { form_id: config.id });
+    }
   }
 
   // Advances to the next step (or submits on the last step). Callers are
@@ -196,6 +200,10 @@ export function QualificationForm({ config, offerId, funnelId = "organic", thank
     }
 
     trackEvent("form_complete", { form_id: config.id, service: config.serviceId, lead_priority: priority });
+    trackEvent("qualifier_completed", { form_id: config.id, service: config.serviceId, lead_priority: priority });
+    if (config.serviceId === "water-softeners") {
+      trackEvent("water_softener_assessment_completed", { form_id: config.id, lead_priority: priority });
+    }
     const leadEvent = leadEventByLeadType[config.leadType];
     if (leadEvent) trackEvent(leadEvent, { lead_priority: priority, funnel_id: funnelId });
 

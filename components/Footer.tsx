@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Facebook, Instagram, Mail, MapPin, Phone } from "lucide-react";
 import { business } from "@/data/business";
-import { getActiveServiceAreas } from "@/data/serviceAreas";
+import { getActiveServiceAreas, getServiceAreaHref } from "@/data/serviceAreas";
 import {
   footerCompanyLinks,
   footerLegalLinks,
@@ -98,7 +98,7 @@ export function Footer() {
           <ul className="mt-3 space-y-2 text-sm">
             {areas.map((a) => (
               <li key={a.slug}>
-                <Link href={`/service-areas/${a.slug}/`} className="hover:underline">
+                <Link href={getServiceAreaHref(a)} className="hover:underline">
                   {a.city}, {a.state}
                 </Link>
               </li>

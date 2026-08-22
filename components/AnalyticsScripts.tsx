@@ -1,12 +1,31 @@
+import { GoogleAnalytics } from "@next/third-parties/google";
 import Script from "next/script";
 
-// Loads GTM, GA4 (gtag.js), and the Meta Pixel only when the corresponding
-// environment variable is set — nothing loads (and no third-party
-// requests fire) until real IDs are configured in .env.local. See
-// .env.example for the full list of variables.
+// Halladay Plumbing's live GA4 property. This is a public measurement ID
+// (it ships in every page's HTML/network requests by design — GA4 IDs
+// are not secrets), so it's safe to default to here rather than require
+// every deploy target to remember to set an env var. Override via
+// NEXT_PUBLIC_GA4_ID for a different property (e.g. a staging GA4
+// property) without touching code.
+const DEFAULT_GA4_ID = "G-CSMNSQBYHM";
+
+// Loads GA4 sitewide via Next.js's own official `@next/third-parties`
+// integration — the framework-recommended way to install a Google tag in
+// an App Router site. It also handles SPA route-change page_view events
+// automatically (App Router navigations don't trigger a full page load,
+// so gtag's own auto pageview only fires once without this).
+//
+// GTM and the Meta Pixel still only load when their env vars are set —
+// nothing else is installed unless explicitly configured. See
+// .env.example.
 export function AnalyticsScripts() {
   const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
-  const ga4Id = process.env.NEXT_PUBLIC_GA4_ID;
+  // Falls back to the live GA4 ID automatically in a production build
+  // (so no deploy target needs an env var set to satisfy "GA4 must load
+  // sitewide"), but NOT in local development, so `npm run dev` doesn't
+  // send test traffic into the real property. Set NEXT_PUBLIC_GA4_ID
+  // locally to opt into testing the real tag during development.
+  const ga4Id = process.env.NEXT_PUBLIC_GA4_ID || (process.env.NODE_ENV === "production" ? DEFAULT_GA4_ID : undefined);
   const metaPixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID;
 
   return (
@@ -17,17 +36,7 @@ export function AnalyticsScripts() {
         </Script>
       )}
 
-      {ga4Id && (
-        <>
-          <Script src={`https://www.googletagmanager.com/gtag/js?id=${ga4Id}`} strategy="afterInteractive" />
-          <Script id="ga4-init" strategy="afterInteractive">
-            {`window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', '${ga4Id}');`}
-          </Script>
-        </>
-      )}
+      {ga4Id && <GoogleAnalytics gaId={ga4Id} />}
 
       {metaPixelId && (
         <Script id="meta-pixel-init" strategy="afterInteractive">

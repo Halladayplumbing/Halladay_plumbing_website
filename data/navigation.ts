@@ -18,7 +18,7 @@ export const primaryNav: NavLink[] = [
   // "Plumbing Services" renders as a mega-menu driven by data/services.ts
   { label: "Water Softeners", href: "/water-softeners/" },
   { label: "Emergency Plumbing", href: "/emergency-plumber-cedar-city-ut/" },
-  { label: "Service Areas", href: "/service-areas/cedar-city-ut/" },
+  { label: "Service Areas", href: "/service-areas/" },
   { label: "Contact", href: "/contact/" },
 ];
 
@@ -32,7 +32,7 @@ export const mobileNav: NavLink[] = [
   { label: "Emergency Plumbing", href: "/emergency-plumber-cedar-city-ut/" },
   { label: "New Construction", href: "/new-construction-plumbing/" },
   { label: "Diamond Club", href: "/diamond-club/" },
-  { label: "Service Areas", href: "/service-areas/cedar-city-ut/" },
+  { label: "Service Areas", href: "/service-areas/" },
   { label: "Reviews", href: "/reviews/" },
   { label: "Specials", href: "/specials/" },
   { label: "About", href: "/about/" },
