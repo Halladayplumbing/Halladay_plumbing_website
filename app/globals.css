@@ -4,23 +4,24 @@
 
 :root {
   /* --- Brand colors ---------------------------------------------------
-     Derived from Halladay's existing blue/navy plumbing-industry palette.
-     Adjust these three brand values if Halladay supplies exact brand
-     hex codes — every component reads from these tokens. */
-  --color-primary: #0b5fa5;       /* Halladay blue */
-  --color-primary-dark: #08426f;
-  --color-primary-light: #e8f2fb;
-  --color-accent: #f5a623;        /* warm CTA accent */
-  --color-accent-dark: #cf8a12;
+     Pulled directly from Halladay's logo (deep brick red #A81111 on
+     black/white). Primary is the brand red; accent is a lighter, brighter
+     red reserved for hover/highlight states so interactive elements pop
+     without losing contrast. Every component reads from these tokens. */
+  --color-primary: #a81111;       /* Halladay red (from logo) */
+  --color-primary-dark: #7c0d0d;  /* pressed/hover on solid red buttons */
+  --color-primary-light: #fbeaea; /* pale red tint for light surfaces */
+  --color-accent: #d64545;        /* lighter red — link/icon hover, highlights */
+  --color-accent-dark: #a81111;   /* solid accent-button hover, settles to brand red */
 
   --color-background: #ffffff;
-  --color-surface: #f6f8fa;
-  --color-text: #12202e;
-  --color-muted: #55697a;
-  --color-border: #e1e7ed;
+  --color-surface: #f8f6f5;
+  --color-text: #1c1917;
+  --color-muted: #6b6260;
+  --color-border: #e8e2e1;
   --color-success: #1e8e5a;
   --color-warning: #b5560a;
-  --color-danger: #c0392b;
+  --color-danger: #b3261e;
 
   --radius-sm: 6px;
   --radius-md: 10px;
