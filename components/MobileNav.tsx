@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
 import { X } from "lucide-react";
@@ -44,7 +45,10 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
         className="absolute right-0 top-0 flex h-full w-[86%] max-w-sm flex-col bg-background shadow-lg animate-fade-in"
       >
         <div className="flex items-center justify-between border-b border-border p-4">
-          <span className="text-base font-bold text-primary">{business.name}</span>
+          <span className="flex items-center gap-2">
+            <Image src="/brand/logo.png" alt="" width={32} height={32} className="h-8 w-8 shrink-0" />
+            <span className="text-base font-bold text-primary">{business.name}</span>
+          </span>
           <button
             type="button"
             className="rounded-md p-2 hover:bg-surface"

@@ -11,6 +11,7 @@ export function organizationSchema() {
     "@type": "Organization",
     name: business.name,
     url: absoluteUrl("/"),
+    logo: absoluteUrl("/brand/logo.png"),
     email: business.email,
     telephone: business.phones.main.e164,
     sameAs: [business.socials.facebook, business.socials.instagram].filter(Boolean),
@@ -32,6 +33,7 @@ export function localBusinessSchema() {
     "@type": "Plumber",
     name: business.name,
     url: absoluteUrl("/"),
+    image: absoluteUrl("/brand/logo.png"),
     telephone: business.phones.main.e164,
     email: business.email,
     areaServed: {

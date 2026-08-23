@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -63,8 +64,11 @@ export function Header() {
     return (
       <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur">
         <div className="container-page flex h-16 items-center justify-between gap-3 lg:h-20">
-          <Link href="/" className="shrink-0 truncate text-base font-extrabold tracking-tight text-primary sm:text-lg lg:text-xl">
-            {business.name}
+          <Link href="/" className="flex shrink-0 items-center gap-2 truncate">
+            <Image src="/brand/logo.png" alt="" width={40} height={40} className="h-9 w-9 shrink-0 lg:h-10 lg:w-10" priority />
+            <span className="truncate text-base font-extrabold tracking-tight text-primary sm:text-lg lg:text-xl">
+              {business.name}
+            </span>
           </Link>
           <PhoneButton
             variant="primary"
@@ -83,8 +87,9 @@ export function Header() {
       <UtilityBar />
       <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur">
         <div className="container-page flex h-16 items-center justify-between gap-4 lg:h-20">
-          <Link href="/" className="shrink-0 text-lg font-extrabold tracking-tight text-primary lg:text-xl">
-            {business.name}
+          <Link href="/" className="flex shrink-0 items-center gap-2">
+            <Image src="/brand/logo.png" alt="" width={44} height={44} className="h-10 w-10 shrink-0 lg:h-11 lg:w-11" priority />
+            <span className="text-lg font-extrabold tracking-tight text-primary lg:text-xl">{business.name}</span>
           </Link>
 
           <nav aria-label="Primary" className="hidden items-center gap-0.5 xl:flex">
