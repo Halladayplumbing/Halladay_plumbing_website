@@ -100,6 +100,14 @@ export const reviews: Review[] = [
     tags: ["water-heaters"],
     source: "google",
   },
+  {
+    id: "google-peter-h",
+    author: "Peter H.",
+    rating: 5,
+    text: "I had Halladay Plumbing install a water softener system in my home in Southern Utah, and the entire experience was seamless from start to finish. Kyler took the time to walk me through the estimate and, more importantly, explain why a water softener makes such a difference with the hard water we have in Southern Utah. I was already seeing the effects of hard water throughout my home — buildup and mineral deposits affecting my washing machine, kitchen sink, showers, bathroom sinks, and other fixtures and appliances. Instead of just trying to sell me a system, Kyler explained how the water softener works, the benefits of reducing hard-water mineral buildup, and what I could expect after installation. Once everything was installed, he walked me through the entire setup and showed me how little maintenance the system requires. I also signed up for Halladay Plumbing's service plan, which includes yearly water heater flushes and regular water softener salt/pellet delivery. Having them handle the ongoing maintenance makes the system even more convenient. If you're dealing with hard water in Cedar City or anywhere in Southern Utah and are considering a whole-home water softener installation, I would definitely recommend Halladay Plumbing. Professional, knowledgeable, easy to work with, and a smooth experience from the initial estimate through installation. I'll definitely be using Halladay Plumbing for my future plumbing needs in Southern Utah.",
+    tags: ["water-softeners"],
+    source: "google",
+  },
 ];
 
 export function getReviewsByTag(tag?: string): Review[] {
