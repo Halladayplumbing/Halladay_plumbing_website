@@ -2,6 +2,7 @@ import { CalendarClock, ShieldCheck, HeartHandshake } from "lucide-react";
 import { business } from "@/data/business";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
+import { VeteranBadge } from "@/components/VeteranBadge";
 import { WhyHalladayInline } from "@/components/sections/WhyHalladayInline";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { pageMetadata } from "@/lib/seo";
@@ -74,10 +75,12 @@ export default function AboutPage() {
             ))}
           </div>
           {business.credentials.veteranOwned.confirmed ? (
-            <p className="mt-6 text-sm font-medium text-ink-muted">
-              🇺🇸 {business.credentials.veteranOwned.label} — proud to be built on the standards Erik
-              carried from his service in the Utah National Guard.
-            </p>
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <VeteranBadge />
+              <p className="text-sm text-ink-muted">
+                Built on the standards Erik carried from his service in the Utah National Guard.
+              </p>
+            </div>
           ) : null}
         </div>
       </section>

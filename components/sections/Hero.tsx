@@ -2,6 +2,7 @@ import { CheckCircle2 } from "lucide-react";
 import { business } from "@/data/business";
 import { CTAButton } from "@/components/CTAButton";
 import { PhoneButton } from "@/components/PhoneButton";
+import { VeteranBadge } from "@/components/VeteranBadge";
 import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 
 const trustPoints = ["Residential & Commercial", "New Construction Available"];
@@ -11,6 +12,7 @@ export function Hero() {
     <section className="border-b border-border bg-surface">
       <div className="container-page grid grid-cols-1 items-center gap-10 py-10 lg:grid-cols-[55%_45%] lg:gap-12 lg:py-16">
         <div>
+          <VeteranBadge className="mb-4" />
           <h1 className="text-hero font-extrabold text-ink">{business.tagline}</h1>
           <p className="mt-5 max-w-xl text-lg text-ink-muted">
             Professional residential and commercial plumbing throughout Cedar City and Southern

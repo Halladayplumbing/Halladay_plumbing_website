@@ -58,8 +58,10 @@ const installSteps = [
 export default function WaterSoftenersPage() {
   const offer = getActiveOfferForService("water-softeners");
   const primaryArea = getPrimaryServiceArea();
+  // Curated hub towns for this inline mention — not all ~50 confirmed
+  // communities (see /service-areas/ for the full region-by-region list).
   const secondaryAreaNames = getActiveServiceAreas()
-    .filter((a) => !a.isPrimary)
+    .filter((a) => a.footerHighlight && !a.isPrimary)
     .map((a) => a.city)
     .join(", ");
 

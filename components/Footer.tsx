@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Facebook, Instagram, Mail, MapPin, Phone } from "lucide-react";
 import { business } from "@/data/business";
 import { getActiveServiceAreas, getServiceAreaHref } from "@/data/serviceAreas";
+import { VeteranBadge } from "@/components/VeteranBadge";
 import {
   footerCompanyLinks,
   footerLegalLinks,
@@ -10,6 +11,10 @@ import {
 
 export function Footer() {
   const areas = getActiveServiceAreas();
+  // Curated hub towns only — the footer isn't the place for a ~50-item
+  // list; the full region-by-region breakdown lives on /service-areas/.
+  const highlighted = areas.filter((a) => a.footerHighlight);
+  const remaining = areas.length - highlighted.length;
 
   return (
     <footer className="bg-primary-dark pb-28 pt-14 text-white/90 lg:pb-14">
@@ -19,6 +24,8 @@ export function Footer() {
           <p className="mt-2 max-w-sm text-sm text-white/70">
             Residential and commercial plumbing for Cedar City and Southern Utah.
           </p>
+
+          <VeteranBadge variant="dark" className="mt-4" />
 
           <ul className="mt-5 space-y-2 text-sm">
             <li className="flex items-center gap-2">
@@ -88,13 +95,20 @@ export function Footer() {
         <div>
           <p className="text-sm font-semibold uppercase tracking-wide text-white/60">Service Areas</p>
           <ul className="mt-3 space-y-2 text-sm">
-            {areas.map((a) => (
+            {highlighted.map((a) => (
               <li key={a.slug}>
                 <Link href={getServiceAreaHref(a)} className="hover:underline">
                   {a.city}, {a.state}
                 </Link>
               </li>
             ))}
+            {remaining > 0 && (
+              <li>
+                <Link href="/service-areas/" className="font-semibold hover:underline">
+                  + {remaining} more areas →
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
       </div>

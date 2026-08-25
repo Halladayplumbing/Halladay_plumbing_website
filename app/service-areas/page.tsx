@@ -1,6 +1,11 @@
 import Link from "next/link";
 import { MapPin } from "lucide-react";
-import { getActiveServiceAreas, getPrimaryServiceArea, getServiceAreaHref } from "@/data/serviceAreas";
+import {
+  getActiveServiceAreas,
+  getActiveServiceAreasByRegion,
+  getPrimaryServiceArea,
+  getServiceAreaHref,
+} from "@/data/serviceAreas";
 import { getFaqsFor } from "@/data/faqs";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { PageHero } from "@/components/sections/PageHero";
@@ -23,7 +28,17 @@ export const metadata = pageMetadata({
 
 export default function ServiceAreasHubPage() {
   const primaryArea = getPrimaryServiceArea();
-  const otherAreas = getActiveServiceAreas().filter((a) => !a.isPrimary);
+  const regions = getActiveServiceAreasByRegion().map((r) => ({
+    ...r,
+    areas: r.areas.filter((a) => !a.isPrimary),
+  }));
+  // Established hub towns only, for the short "Professional water
+  // softener installation for X, Y, Z" line below — not the first four
+  // of a ~50-item alphabetical/regional list.
+  const highlightCities = getActiveServiceAreas()
+    .filter((a) => a.footerHighlight && !a.isPrimary)
+    .slice(0, 4)
+    .map((a) => a.city);
 
   return (
     <>
@@ -88,23 +103,36 @@ export default function ServiceAreasHubPage() {
           </Link>
 
           <h2 className="mt-14 text-2xl font-extrabold text-ink sm:text-3xl">Also Serving</h2>
-          <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {otherAreas.map((area) => (
-              <Link
-                key={area.slug}
-                href={getServiceAreaHref(area)}
-                className="flex items-center justify-between gap-3 rounded-lg border border-border bg-background p-5 shadow-sm transition-shadow hover:shadow-md"
-              >
-                <span className="flex items-center gap-3">
-                  <MapPin className="h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
-                  <span className="font-semibold text-ink">
-                    {area.city}, {area.state}
-                  </span>
-                </span>
-                <span className="shrink-0 text-sm font-semibold text-primary">
-                  {area.hasDedicatedPage ? "View Area →" : "Request Service →"}
-                </span>
-              </Link>
+          <p className="mt-2 text-ink-muted">
+            Halladay Plumbing&apos;s service radius reaches well beyond Cedar City — grouped below
+            by region.
+          </p>
+
+          <div className="mt-8 space-y-10">
+            {regions.map((region) => (
+              <div key={region.name}>
+                <h3 className="text-sm font-semibold uppercase tracking-wide text-ink-muted">{region.name}</h3>
+                {region.note && <p className="mt-1 text-xs text-ink-muted">{region.note}</p>}
+                <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {region.areas.map((area) => (
+                    <Link
+                      key={area.slug}
+                      href={getServiceAreaHref(area)}
+                      className="flex items-center justify-between gap-3 rounded-lg border border-border bg-background p-5 shadow-sm transition-shadow hover:shadow-md"
+                    >
+                      <span className="flex items-center gap-3">
+                        <MapPin className="h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
+                        <span className="font-semibold text-ink">
+                          {area.city}, {area.state}
+                        </span>
+                      </span>
+                      <span className="shrink-0 text-sm font-semibold text-primary">
+                        {area.hasDedicatedPage ? "View Area →" : "Request Service →"}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
         </div>
@@ -114,7 +142,7 @@ export default function ServiceAreasHubPage() {
         <div className="container-page mx-auto max-w-2xl text-center">
           <h2 className="text-2xl font-extrabold text-ink sm:text-3xl">Hard Water Throughout Southern Utah</h2>
           <p className="mt-4 text-ink-muted">
-            Professional water softener installation for {primaryArea.city}, {otherAreas.slice(0, 4).map((a) => a.city).join(", ")}{" "}
+            Professional water softener installation for {primaryArea.city}, {highlightCities.join(", ")}{" "}
             and surrounding Southern Utah communities.
           </p>
           <CTAButton href="/water-softeners/" size="lg" className="mt-6">
