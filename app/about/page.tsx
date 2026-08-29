@@ -58,13 +58,13 @@ export default function AboutPage() {
               show up at your door are the same people accountable for the results.
             </p>
           </div>
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg">
+          <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg">
             <Image
               src="/photos/halladay-plumbing-truck-excavator-cedar-city.jpg"
               alt="Halladay Plumbing truck and excavator staged at a new construction job site in Cedar City, UT"
               fill
               sizes="(min-width: 1024px) 45vw, 100vw"
-              className="object-cover"
+              className="object-cover object-bottom"
             />
           </div>
         </div>
