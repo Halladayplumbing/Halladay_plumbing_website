@@ -16,14 +16,14 @@ import { localBusinessSchema } from "@/lib/schema";
 import { getFaqsFor } from "@/data/faqs";
 
 export const metadata: Metadata = {
-  title: "Cedar City Plumber | Residential & Commercial Plumbing",
+  title: "Cedar City Plumber | Halladay Plumbing",
   description:
-    "Halladay Plumbing provides residential and commercial plumbing in Cedar City and Southern Utah — water softeners, water heaters, drain cleaning, and leak repair.",
+    "Veteran-owned plumbers serving Cedar City & Southern Utah since 1994. Water heaters, softeners, drain cleaning, repairs, and new construction. Call today.",
   alternates: { canonical: "/" },
   openGraph: {
     title: "Halladay Plumbing | Cedar City's Local Plumbing Experts",
     description:
-      "Residential and commercial plumbing throughout Cedar City and Southern Utah — water softeners, water heaters, drain cleaning, and more.",
+      "Veteran-owned, local plumbers serving Cedar City & Southern Utah since 1994 — water heaters, softeners, drain cleaning, repairs, and new construction.",
     url: "/",
   },
 };
