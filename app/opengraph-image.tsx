@@ -12,6 +12,13 @@ export const alt = `${business.name} — ${business.tagline}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
+const credentialTags = [
+  business.credentials.veteranOwned.confirmed ? business.credentials.veteranOwned.label : null,
+  `Serving Since ${business.foundedYear}`,
+  "Residential & Commercial",
+  "New Construction",
+].filter((tag): tag is string => Boolean(tag));
+
 export default async function Image() {
   const logoBuffer = await readFile(join(process.cwd(), "public/brand/logo.png"));
   const logoSrc = `data:image/png;base64,${logoBuffer.toString("base64")}`;
@@ -57,7 +64,34 @@ export default async function Image() {
         <div
           style={{
             marginTop: 28,
-            fontSize: 24,
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            gap: 12,
+          }}
+        >
+          {credentialTags.map((tag) => (
+            <div
+              key={tag}
+              style={{
+                display: "flex",
+                padding: "8px 20px",
+                borderRadius: 999,
+                border: "2px solid #a81111",
+                backgroundColor: "#fbeaea",
+                color: "#7c0d0d",
+                fontSize: 22,
+                fontWeight: 600,
+              }}
+            >
+              {tag}
+            </div>
+          ))}
+        </div>
+        <div
+          style={{
+            marginTop: 24,
+            fontSize: 22,
             fontWeight: 500,
             color: "#6b6260",
           }}
