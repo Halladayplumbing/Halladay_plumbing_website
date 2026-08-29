@@ -48,7 +48,7 @@ export function ServiceAreaChecker() {
             placeholder="Enter your city (e.g. Cedar City, St. George)"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="form-input pl-10"
+            className="form-input !pl-10"
           />
         </div>
         <button

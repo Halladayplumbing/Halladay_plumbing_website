@@ -2,6 +2,7 @@ import { MapPin } from "lucide-react";
 import Link from "next/link";
 import { getActiveServiceAreas, getServiceAreaHref } from "@/data/serviceAreas";
 import { business } from "@/data/business";
+import { PhoneButton } from "@/components/PhoneButton";
 
 // Compact sidebar next to the map — with ~50 confirmed communities, a
 // flat list of all of them here would be unreadable. Show the primary
@@ -73,10 +74,14 @@ export function ServiceAreaMap() {
           </a>
         )}
 
-        <p className="mt-4 text-xs text-ink-muted">
-          Don&apos;t see your town? Call {business.phones.main.display} — we may still be able to
-          help.
-        </p>
+        <div className="mt-6">
+          <p className="mb-2 text-xs text-ink-muted">Don&apos;t see your town?</p>
+          <PhoneButton
+            variant="outline"
+            className="!w-auto !border-primary !text-primary"
+            label="Give Us a Call to See If We Can Help"
+          />
+        </div>
       </div>
     </div>
   );
