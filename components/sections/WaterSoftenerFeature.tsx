@@ -1,6 +1,6 @@
+import Image from "next/image";
 import { Droplets, CheckCircle2 } from "lucide-react";
 import { CTAButton } from "@/components/CTAButton";
-import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 import { OfferCard } from "@/components/OfferCard";
 import { getActiveOfferForService } from "@/data/offers";
 
@@ -56,7 +56,15 @@ export function WaterSoftenerFeature() {
         </div>
 
         <div className="space-y-6">
-          <PlaceholderImage label="Water softener installation photo" aspect="aspect-[4/3]" />
+          <div className="relative aspect-[3/4] w-full overflow-hidden rounded-lg">
+            <Image
+              src="/photos/halladay-plumbing-water-softener-install.jpg"
+              alt="Whole-house water softener and filtration system installed by Halladay Plumbing in a Cedar City home"
+              fill
+              sizes="(min-width: 1024px) 45vw, 100vw"
+              className="object-cover"
+            />
+          </div>
           {offer && <OfferCard offer={offer} variant="featured" ctaHref="/water-softeners/" />}
         </div>
       </div>

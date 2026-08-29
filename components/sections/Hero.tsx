@@ -1,9 +1,9 @@
+import Image from "next/image";
 import { CheckCircle2 } from "lucide-react";
 import { business } from "@/data/business";
 import { CTAButton } from "@/components/CTAButton";
 import { PhoneButton } from "@/components/PhoneButton";
 import { VeteranBadge } from "@/components/VeteranBadge";
-import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 
 const trustPoints = ["Residential & Commercial", "New Construction Available"];
 
@@ -41,10 +41,16 @@ export function Hero() {
           </ul>
         </div>
 
-        <PlaceholderImage
-          label="Halladay technician, truck, or jobsite photo"
-          aspect="aspect-[4/3] lg:aspect-square"
-        />
+        <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg lg:aspect-square">
+          <Image
+            src="/photos/halladay-plumbing-truck-excavator-cedar-city.jpg"
+            alt="Halladay Plumbing truck and excavator staged at a new construction job site in Cedar City, UT"
+            fill
+            sizes="(min-width: 1024px) 45vw, 100vw"
+            className="object-cover object-bottom"
+            priority
+          />
+        </div>
       </div>
     </section>
   );

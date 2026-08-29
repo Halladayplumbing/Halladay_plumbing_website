@@ -99,9 +99,9 @@ export default function WaterSoftenersPage() {
 
       {/* Hard water education */}
       <section className="py-14 lg:py-20">
-        <div className="container-page grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
-          <div>
-            <div className="mb-3 flex items-center gap-2 text-primary">
+        <div className="container-page grid grid-cols-1 items-center gap-10 lg:gap-14">
+          <div className="mx-auto max-w-2xl text-center lg:text-left">
+            <div className="mb-3 flex items-center justify-center gap-2 text-primary lg:justify-start">
               <Droplets className="h-6 w-6" aria-hidden="true" />
               <span className="text-sm font-semibold uppercase tracking-wide">Hard Water 101</span>
             </div>
@@ -120,7 +120,13 @@ export default function WaterSoftenersPage() {
               spotting, and reduced efficiency.
             </p>
           </div>
-          <PlaceholderImage label="Diagram or photo showing hard-water mineral buildup on a fixture" aspect="aspect-[4/3]" />
+          {/* No real photo/diagram supplied yet for hard-water mineral
+              buildup. Hidden rather than removed — restore the
+              lg:grid-cols-2 layout above and this placeholder once
+              photography is available. */}
+          <div className="hidden" aria-hidden="true">
+            <PlaceholderImage label="Diagram or photo showing hard-water mineral buildup on a fixture" aspect="aspect-[4/3]" />
+          </div>
         </div>
       </section>
 

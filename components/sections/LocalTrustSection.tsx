@@ -43,9 +43,14 @@ export function LocalTrustSection() {
           ))}
         </div>
 
-        <div className="mt-16 grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
-          <PlaceholderImage label="Halladay Plumbing team or founder photo" aspect="aspect-[4/3]" />
-          <div>
+        <div className="mt-16 grid grid-cols-1 items-center gap-10 lg:gap-14">
+          {/* No real team/founder photo supplied yet. Hidden rather than
+              removed — restore the lg:grid-cols-2 layout above and this
+              placeholder once photography is available. */}
+          <div className="hidden" aria-hidden="true">
+            <PlaceholderImage label="Halladay Plumbing team or founder photo" aspect="aspect-[4/3]" />
+          </div>
+          <div className="mx-auto max-w-2xl text-center lg:text-left">
             <h2 className="text-section-title font-extrabold text-ink">
               A Local Plumbing Company Serving Southern Utah
             </h2>
