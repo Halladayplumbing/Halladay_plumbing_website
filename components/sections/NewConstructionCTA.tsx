@@ -36,7 +36,7 @@ export function NewConstructionCTA() {
               variant="outline"
               className="!border-white !text-white hover:!bg-white/10"
             >
-              Learn More
+              See New Construction Plumbing
             </CTAButton>
           </div>
         </div>

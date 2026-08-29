@@ -8,6 +8,7 @@ import { business } from "@/data/business";
 import { mobileNav } from "@/data/navigation";
 import { PhoneButton } from "./PhoneButton";
 import { CTAButton } from "./CTAButton";
+import { cn } from "@/lib/utils";
 
 export function MobileNav({ open, onClose }: { open: boolean; onClose: () => void }) {
   useEffect(() => {
@@ -29,10 +30,15 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
     return () => document.removeEventListener("keydown", handleKey);
   }, [onClose]);
 
-  if (!open) return null;
-
   return (
-    <div className="fixed inset-0 z-50 xl:hidden">
+    // Rendered unconditionally (visibility toggled via `hidden`, not
+    // conditional mounting) so every link in this drawer — the site's
+    // full mobile nav — is present in the initial DOM for crawlers.
+    // Googlebot renders pages mobile-first and doesn't click the hamburger
+    // button first, so a `return null` here would mean it never sees any
+    // of these links. `hidden` also keeps the drawer out of the tab order
+    // and accessibility tree while closed, same as the old unmounted state.
+    <div className={cn("fixed inset-0 z-50 xl:hidden", !open && "hidden")}>
       <button
         aria-label="Close menu"
         className="absolute inset-0 bg-ink/50"
@@ -40,7 +46,7 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
       />
       <div
         role="dialog"
-        aria-modal="true"
+        aria-modal={open}
         aria-label="Site menu"
         className="absolute right-0 top-0 flex h-full w-[86%] max-w-sm flex-col bg-background shadow-lg animate-fade-in"
       >

@@ -105,61 +105,71 @@ export function Header() {
                 <ChevronDown className={cn("h-4 w-4 transition-transform", menuOpen && "rotate-180")} aria-hidden="true" />
               </button>
 
-              {menuOpen && (
-                <div className="absolute left-1/2 top-full z-50 mt-2 w-[640px] -translate-x-1/2 rounded-lg border border-border bg-background p-6 shadow-lg animate-fade-in">
-                  <div className="grid grid-cols-2 gap-6">
-                    {serviceCategories.map((cat) => (
-                      <div key={cat.id}>
-                        <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-ink-muted">
-                          {cat.label}
-                        </p>
-                        <ul className="space-y-1">
-                          {cat.services.map((sid) => {
-                            const svc = getServiceById(sid);
-                            if (!svc) return null;
-                            return (
-                              <li key={sid}>
-                                <Link
-                                  href={`/${svc.slug}/`}
-                                  className="block rounded-md px-2 py-1.5 text-sm text-ink hover:bg-surface hover:text-primary"
-                                  onClick={() => setMenuOpen(false)}
-                                >
-                                  {svc.navLabel ?? svc.name}
-                                </Link>
-                              </li>
-                            );
-                          })}
-                        </ul>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-4">
+              {/* Rendered unconditionally (visibility toggled via the `hidden`
+                  class, not conditional mounting) so every link here is
+                  present in the initial DOM for crawlers — Googlebot doesn't
+                  click to open menus before rendering a page, so links that
+                  only mount on `menuOpen` would otherwise never be
+                  discovered here. `hidden` also keeps it out of the tab
+                  order and accessibility tree while closed, same as before. */}
+              <div
+                className={cn(
+                  "absolute left-1/2 top-full z-50 mt-2 w-[640px] -translate-x-1/2 rounded-lg border border-border bg-background p-6 shadow-lg animate-fade-in",
+                  !menuOpen && "hidden",
+                )}
+              >
+                <div className="grid grid-cols-2 gap-6">
+                  {serviceCategories.map((cat) => (
+                    <div key={cat.id}>
+                      <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-ink-muted">
+                        {cat.label}
+                      </p>
+                      <ul className="space-y-1">
+                        {cat.services.map((sid) => {
+                          const svc = getServiceById(sid);
+                          if (!svc) return null;
+                          return (
+                            <li key={sid}>
+                              <Link
+                                href={`/${svc.slug}/`}
+                                className="block rounded-md px-2 py-1.5 text-sm text-ink hover:bg-surface hover:text-primary"
+                                onClick={() => setMenuOpen(false)}
+                              >
+                                {svc.navLabel ?? svc.name}
+                              </Link>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-4">
+                  <Link
+                    href="/plumbing-services/"
+                    className="text-sm font-semibold text-primary hover:underline"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    View all plumbing services
+                  </Link>
+                  <div className="flex items-center gap-4">
                     <Link
-                      href="/plumbing-services/"
-                      className="text-sm font-semibold text-primary hover:underline"
+                      href="/reviews/"
+                      className="text-sm font-medium text-ink-muted hover:text-primary"
                       onClick={() => setMenuOpen(false)}
                     >
-                      View all plumbing services
+                      Reviews
                     </Link>
-                    <div className="flex items-center gap-4">
-                      <Link
-                        href="/reviews/"
-                        className="text-sm font-medium text-ink-muted hover:text-primary"
-                        onClick={() => setMenuOpen(false)}
-                      >
-                        Reviews
-                      </Link>
-                      <Link
-                        href="/specials/"
-                        className="text-sm font-medium text-ink-muted hover:text-primary"
-                        onClick={() => setMenuOpen(false)}
-                      >
-                        Specials
-                      </Link>
-                    </div>
+                    <Link
+                      href="/specials/"
+                      className="text-sm font-medium text-ink-muted hover:text-primary"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      Specials
+                    </Link>
                   </div>
                 </div>
-              )}
+              </div>
             </div>
 
             {primaryNav
