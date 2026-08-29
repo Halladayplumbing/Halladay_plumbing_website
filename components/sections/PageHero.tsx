@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Image from "next/image";
 import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 
 interface PageHeroProps {
@@ -6,11 +7,22 @@ interface PageHeroProps {
   headline: string;
   subheadline: string;
   imageLabel: string;
+  image?: { src: string; alt: string };
+  imageAspect?: string;
   primaryCta: ReactNode;
   secondaryCta?: ReactNode;
 }
 
-export function PageHero({ eyebrow, headline, subheadline, imageLabel, primaryCta, secondaryCta }: PageHeroProps) {
+export function PageHero({
+  eyebrow,
+  headline,
+  subheadline,
+  imageLabel,
+  image,
+  imageAspect = "aspect-[4/3] lg:aspect-square",
+  primaryCta,
+  secondaryCta,
+}: PageHeroProps) {
   return (
     <section className="border-b border-border bg-surface">
       <div className="container-page grid grid-cols-1 items-center gap-10 py-10 lg:grid-cols-[55%_45%] lg:gap-12 lg:py-16">
@@ -25,7 +37,20 @@ export function PageHero({ eyebrow, headline, subheadline, imageLabel, primaryCt
           </div>
         </div>
 
-        <PlaceholderImage label={imageLabel} aspect="aspect-[4/3] lg:aspect-square" />
+        {image ? (
+          <div className={`relative w-full overflow-hidden rounded-lg ${imageAspect}`}>
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              sizes="(min-width: 1024px) 45vw, 100vw"
+              className="object-cover"
+              priority
+            />
+          </div>
+        ) : (
+          <PlaceholderImage label={imageLabel} aspect={imageAspect} />
+        )}
       </div>
     </section>
   );

@@ -14,6 +14,7 @@ export interface ServicePageContent {
   heroHeadline: string;
   heroSubheadline: string;
   heroImageLabel: string;
+  heroImage?: { src: string; alt: string };
   problemHeadline: string;
   problemBody: string;
   symptoms: string[];
@@ -75,6 +76,10 @@ export const servicePageContent: Record<string, ServicePageContent> = {
     heroSubheadline:
       "Repair, replacement, or new installation — Halladay Plumbing diagnoses the problem and gets your hot water working the way it should.",
     heroImageLabel: "Water heater installation in a residential mechanical room",
+    heroImage: {
+      src: "/photos/halladay-plumbing-water-heater-install.jpg",
+      alt: "Two Bradford White gas water heaters installed side by side in a Cedar City home by Halladay Plumbing",
+    },
     problemHeadline: "Water Heater Acting Up?",
     problemBody:
       "No hot water, water that doesn't stay hot, strange noises, or a unit that's visibly leaking are all signs your water heater needs attention. The right fix depends on the type of unit, its age, and what's actually happening.",

@@ -42,6 +42,7 @@ export function ServicePageTemplate({ service, content }: { service: Service; co
         headline={content.heroHeadline}
         subheadline={content.heroSubheadline}
         imageLabel={content.heroImageLabel}
+        image={content.heroImage}
         primaryCta={
           form ? (
             <CTAButton href="#qualify" size="lg" trackAs="schedule_service_click">

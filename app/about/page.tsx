@@ -1,7 +1,7 @@
+import Image from "next/image";
 import { CalendarClock, ShieldCheck, HeartHandshake } from "lucide-react";
 import { business } from "@/data/business";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 import { VeteranBadge } from "@/components/VeteranBadge";
 import { WhyHalladayInline } from "@/components/sections/WhyHalladayInline";
 import { FinalCTA } from "@/components/sections/FinalCTA";
@@ -58,7 +58,15 @@ export default function AboutPage() {
               show up at your door are the same people accountable for the results.
             </p>
           </div>
-          <PlaceholderImage label="Halladay Plumbing team, founder, or truck photo" aspect="aspect-[4/3]" />
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg">
+            <Image
+              src="/photos/halladay-plumbing-truck-excavator-cedar-city.jpg"
+              alt="Halladay Plumbing truck and excavator staged at a new construction job site in Cedar City, UT"
+              fill
+              sizes="(min-width: 1024px) 45vw, 100vw"
+              className="object-cover"
+            />
+          </div>
         </div>
       </section>
 

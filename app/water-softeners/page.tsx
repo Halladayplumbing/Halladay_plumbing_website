@@ -84,6 +84,11 @@ export default function WaterSoftenersPage() {
         headline={`Water Softener Installation in ${primaryArea.city}, ${primaryArea.state}`}
         subheadline="Hard water takes a toll on your appliances, fixtures, faucets, showers, and water heater over time. Serving homeowners throughout Cedar City and Southern Utah, Halladay Plumbing installs a properly sized water softener to protect your home's plumbing system at the source."
         imageLabel="Whole-house water softener system installed in a Cedar City home"
+        image={{
+          src: "/photos/halladay-plumbing-water-softener-install.jpg",
+          alt: "Whole-house water softener and filtration system installed by Halladay Plumbing in a Cedar City home",
+        }}
+        imageAspect="aspect-[3/4] lg:aspect-[4/5]"
         primaryCta={
           <CTAButton href="#qualify" size="lg">
             See If Your Home Qualifies
