@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, type KeyboardEvent } from "react";
 import { CheckCircle2, MapPin, Search, XCircle } from "lucide-react";
 import { findServiceAreaByQuery, getServiceAreaHref, getPrimaryServiceArea } from "@/data/serviceAreas";
 import { CTAButton } from "./CTAButton";
@@ -16,8 +16,13 @@ export function ServiceAreaChecker() {
   const [result, setResult] = useState<Result>({ checked: false });
   const primaryArea = getPrimaryServiceArea();
 
-  function handleSubmit(e: FormEvent) {
-    e.preventDefault();
+  // Not a real <form> on purpose — this is a lookup utility, not a lead
+  // form, and GHL External Tracking (installed sitewide) treats any real
+  // <form> submit event as a lead-form submission, which was creating
+  // empty GHL contacts from this tool. type="button" + this handler keeps
+  // the exact same UX (click, or press Enter in the input) without ever
+  // emitting a native submit event.
+  function runCheck() {
     const trimmed = query.trim();
     if (!trimmed) return;
 
@@ -34,9 +39,15 @@ export function ServiceAreaChecker() {
     );
   }
 
+  function handleKeyDown(e: KeyboardEvent<HTMLInputElement>) {
+    if (e.key === "Enter") {
+      runCheck();
+    }
+  }
+
   return (
     <div className="rounded-lg border border-border bg-background p-6 shadow-sm sm:p-8">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:flex-row">
+      <div className="flex flex-col gap-3 sm:flex-row">
         <label htmlFor="service-area-query" className="sr-only">
           Enter your city
         </label>
@@ -48,16 +59,18 @@ export function ServiceAreaChecker() {
             placeholder="Enter your city (e.g. Cedar City, St. George)"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={handleKeyDown}
             className="form-input !pl-10"
           />
         </div>
         <button
-          type="submit"
+          type="button"
+          onClick={runCheck}
           className="min-h-[48px] shrink-0 rounded-md bg-primary px-6 py-3 font-semibold text-white transition-colors hover:bg-primary-dark"
         >
           Check My Area
         </button>
-      </form>
+      </div>
 
       {result.checked && (
         <div
