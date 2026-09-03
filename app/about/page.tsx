@@ -18,6 +18,25 @@ export const metadata = pageMetadata({
 // Utah National Guard service starting 1992, company founded 1994.
 // Ties directly into the confirmed veteranOwned credential in
 // data/business.ts, which isn't rendered anywhere else on the site yet.
+const team = [
+  {
+    image: "/photos/erik-halladay-founder-owner-portrait.webp",
+    alt: "Erik Halladay, founder and owner of Halladay Plumbing",
+    name: "Erik Halladay",
+    role: "Founder & Owner",
+    bio: "Erik founded Halladay Plumbing in 1994 after beginning his plumbing career in 1992. He built the company around professional workmanship, straightforward communication, and long-term relationships with customers throughout Southern Utah.",
+    veteran: true,
+  },
+  {
+    image: "/photos/kyler-bennett-service-manager-portrait.webp",
+    alt: "Kyler Bennett, service manager at Halladay Plumbing",
+    name: "Kyler Bennett",
+    role: "Service Manager",
+    bio: "Kyler leads Halladay's service team with a focus on accurate diagnosis, clear communication, and professional care inside the customer's home. He helps make sure customers understand the recommended solution and the work being completed.",
+    veteran: false,
+  },
+];
+
 const storyCards = [
   {
     icon: CalendarClock,
@@ -54,17 +73,18 @@ export default function AboutPage() {
               new construction.
             </p>
             <p className="mt-4 text-ink-muted">
-              We&apos;re an independently owned local team, not a franchise — so the people who
-              show up at your door are the same people accountable for the results.
+              Halladay Plumbing is built around local relationships, clear communication, and
+              professional workmanship. Our team lives and works in the communities we serve, and
+              we stand behind the work we do.
             </p>
           </div>
           <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg">
             <Image
-              src="/photos/halladay-plumbing-truck-excavator-cedar-city.jpg"
-              alt="Halladay Plumbing truck and excavator staged at a new construction job site in Cedar City, UT"
+              src="/photos/erik-halladay-founder-owner-with-service-truck.webp"
+              alt="Erik Halladay, founder and owner of Halladay Plumbing, standing beside a Halladay service truck in Cedar City"
               fill
               sizes="(min-width: 1024px) 45vw, 100vw"
-              className="object-cover object-bottom"
+              className="object-cover object-center"
             />
           </div>
         </div>
@@ -90,6 +110,37 @@ export default function AboutPage() {
               </p>
             </div>
           ) : null}
+        </div>
+      </section>
+
+      <section className="py-14 lg:py-20">
+        <div className="container-page">
+          <p className="text-xs font-semibold uppercase tracking-wide text-ink-muted">
+            The People Behind Halladay Plumbing
+          </p>
+          <h2 className="mt-2 text-section-title font-extrabold text-ink">Meet the Team</h2>
+
+          <div className="mx-auto mt-8 grid max-w-3xl grid-cols-1 gap-8 sm:grid-cols-2">
+            {team.map((member) => (
+              <div key={member.name} className="overflow-hidden rounded-lg border border-border bg-background">
+                <div className="relative aspect-[4/5] w-full">
+                  <Image
+                    src={member.image}
+                    alt={member.alt}
+                    fill
+                    sizes="(min-width: 640px) 360px, 100vw"
+                    className="object-cover object-[50%_20%]"
+                  />
+                </div>
+                <div className="p-6">
+                  <p className="text-lg font-bold text-ink">{member.name}</p>
+                  <p className="mt-1 text-sm font-semibold text-primary">{member.role}</p>
+                  {member.veteran ? <VeteranBadge className="mt-3" /> : null}
+                  <p className="mt-3 text-sm text-ink-muted">{member.bio}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
