@@ -53,7 +53,7 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
         <div className="flex items-center justify-between border-b border-border p-4">
           <span className="flex items-center gap-2">
             <Image src="/brand/logo.png" alt="" width={32} height={32} className="h-8 w-8 shrink-0" />
-            <span className="text-base font-bold text-primary">{business.name}</span>
+            <span className="text-base font-bold uppercase text-ink">{business.name}</span>
           </span>
           <button
             type="button"
