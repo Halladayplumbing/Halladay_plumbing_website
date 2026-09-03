@@ -87,10 +87,17 @@ export function ContactForm({ initialServiceId, initialOfferId, initialCity }: C
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+    <form
+      id="halladay-contact-form"
+      name="halladay-contact-form"
+      onSubmit={handleSubmit}
+      className="space-y-4"
+      noValidate
+    >
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <TextField
           label="First name"
+          name="firstName"
           required
           autoComplete="given-name"
           value={values.firstName}
@@ -98,12 +105,14 @@ export function ContactForm({ initialServiceId, initialOfferId, initialCity }: C
         />
         <TextField
           label="Last name"
+          name="lastName"
           autoComplete="family-name"
           value={values.lastName}
           onChange={(v) => setValues((s) => ({ ...s, lastName: v }))}
         />
         <TextField
           label="Phone"
+          name="phone"
           type="tel"
           required
           autoComplete="tel"
@@ -112,6 +121,7 @@ export function ContactForm({ initialServiceId, initialOfferId, initialCity }: C
         />
         <TextField
           label="Email"
+          name="email"
           type="email"
           autoComplete="email"
           value={values.email}
@@ -121,6 +131,7 @@ export function ContactForm({ initialServiceId, initialOfferId, initialCity }: C
         <label className="block text-sm font-medium text-ink">
           Service
           <select
+            name="service"
             className="form-input mt-1.5"
             value={values.service}
             onChange={(e) => setValues((s) => ({ ...s, service: e.target.value }))}
@@ -137,6 +148,7 @@ export function ContactForm({ initialServiceId, initialOfferId, initialCity }: C
 
         <TextField
           label="City"
+          name="city"
           autoComplete="address-level2"
           value={values.city}
           onChange={(v) => setValues((s) => ({ ...s, city: v }))}
@@ -165,6 +177,7 @@ export function ContactForm({ initialServiceId, initialOfferId, initialCity }: C
       <label className="block text-sm font-medium text-ink">
         Message
         <textarea
+          name="message"
           className="form-input mt-1.5 min-h-[120px]"
           value={values.message}
           onChange={(e) => setValues((s) => ({ ...s, message: e.target.value }))}
@@ -172,12 +185,18 @@ export function ContactForm({ initialServiceId, initialOfferId, initialCity }: C
       </label>
 
       {/* Honeypot — hidden from real users via CSS, not display:none, to
-          discourage bots that skip hidden inputs. */}
+          discourage bots that skip hidden inputs. Deliberately NOT named
+          "company" (even though the state field above is called that) —
+          a name like that would read as a legitimate business/company
+          field to GHL's External Tracking field-mapping, so this uses an
+          obviously-internal name instead to keep it out of any real
+          contact record. */}
       <div className="absolute -left-[9999px]" aria-hidden="true">
         <label>
           Company
           <input
             type="text"
+            name="halladay_hp_field"
             tabIndex={-1}
             autoComplete="off"
             value={values.company}
@@ -204,6 +223,7 @@ export function ContactForm({ initialServiceId, initialOfferId, initialCity }: C
 
 function TextField({
   label,
+  name,
   required,
   type = "text",
   autoComplete,
@@ -211,6 +231,7 @@ function TextField({
   onChange,
 }: {
   label: string;
+  name?: string;
   required?: boolean;
   type?: string;
   autoComplete?: string;
@@ -223,6 +244,7 @@ function TextField({
       {required && <span className="text-danger"> *</span>}
       <input
         type={type}
+        name={name}
         required={required}
         autoComplete={autoComplete}
         value={value}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
 import type { QualificationFormConfig } from "@/data/forms";
@@ -140,6 +140,24 @@ export function QualificationForm({ config, offerId, funnelId = "organic", thank
     advance(step);
   }
 
+  // The form's native onSubmit — reached only via the final (contact) step's
+  // button, which is the only Continue/CTA button rendered with
+  // type="submit" (see isLastStep below). Every earlier step's button is
+  // type="button" and advances via handleContinueClick()/onClick instead,
+  // so this never fires mid-wizard. Mirrors exactly what advance() already
+  // does for the last step, just triggered by the form's real submit event
+  // (so GHL External Tracking's submit listener sees it) instead of an
+  // onClick handler — kept as the single source of truth for submission so
+  // the button never carries both an onClick and a type="submit" at once,
+  // which would fire handleSubmit() twice.
+  function handleFormSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (!isLastStep || !canAdvance() || submitting) return;
+    trackEvent("form_step_complete", { form_id: config.id, step: step.id, step_index: stepIndex + 1 });
+    setDirection(1);
+    handleSubmit();
+  }
+
   function goBack() {
     if (autoAdvanceTimer.current) clearTimeout(autoAdvanceTimer.current);
     if (stepIndex === 0) return;
@@ -210,7 +228,19 @@ export function QualificationForm({ config, offerId, funnelId = "organic", thank
   const showContinueButton = step.type !== "single-select" || submitting;
 
   return (
-    <div className="rounded-lg border border-border bg-background p-6 shadow-md sm:p-8">
+    <form
+      id="halladay-qualification-form"
+      name="halladay-qualification-form"
+      onSubmit={handleFormSubmit}
+      noValidate
+      className="rounded-lg border border-border bg-background p-6 shadow-md sm:p-8"
+    >
+      {/* Not a user-entered field — exposes which service this
+          qualification form is for so a form-scanning script (GHL
+          External Tracking) can pick it up alongside the contact fields,
+          without adding any visible input or changing the wizard. */}
+      <input type="hidden" name="service" value={config.serviceId} />
+
       <ProgressIndicator step={stepIndex + 1} total={totalSteps} />
 
       <div className="overflow-hidden">
@@ -257,6 +287,7 @@ export function QualificationForm({ config, offerId, funnelId = "organic", thank
                 <Field label="First name" required>
                   <input
                     type="text"
+                    name="firstName"
                     required
                     autoComplete="given-name"
                     value={contact.firstName}
@@ -270,6 +301,7 @@ export function QualificationForm({ config, offerId, funnelId = "organic", thank
                 <Field label="Last name">
                   <input
                     type="text"
+                    name="lastName"
                     autoComplete="family-name"
                     value={contact.lastName}
                     onChange={(e) => setContact((c) => ({ ...c, lastName: e.target.value }))}
@@ -279,6 +311,7 @@ export function QualificationForm({ config, offerId, funnelId = "organic", thank
                 <Field label="Phone" required>
                   <input
                     type="tel"
+                    name="phone"
                     required
                     inputMode="tel"
                     autoComplete="tel"
@@ -290,6 +323,7 @@ export function QualificationForm({ config, offerId, funnelId = "organic", thank
                 <Field label="Email">
                   <input
                     type="email"
+                    name="email"
                     inputMode="email"
                     autoComplete="email"
                     value={contact.email}
@@ -301,6 +335,7 @@ export function QualificationForm({ config, offerId, funnelId = "organic", thank
                   <Field label="Company / Builder name">
                     <input
                       type="text"
+                      name="company"
                       autoComplete="organization"
                       value={contact.company}
                       onChange={(e) => setContact((c) => ({ ...c, company: e.target.value }))}
@@ -311,6 +346,7 @@ export function QualificationForm({ config, offerId, funnelId = "organic", thank
                 <Field label="City">
                   <input
                     type="text"
+                    name="city"
                     autoComplete="address-level2"
                     value={contact.city}
                     onChange={(e) => setContact((c) => ({ ...c, city: e.target.value }))}
@@ -319,6 +355,7 @@ export function QualificationForm({ config, offerId, funnelId = "organic", thank
                 </Field>
                 <Field label="Preferred contact method">
                   <select
+                    name="preferredContact"
                     value={contact.preferredContact}
                     onChange={(e) =>
                       setContact((c) => ({ ...c, preferredContact: e.target.value as ContactValues["preferredContact"] }))
@@ -348,7 +385,7 @@ export function QualificationForm({ config, offerId, funnelId = "organic", thank
 
       <div className="mt-8 flex items-center justify-between gap-3">
         {stepIndex > 0 ? (
-          <Button variant="ghost" size="md" onClick={goBack} icon={<ArrowLeft className="h-4 w-4" aria-hidden="true" />}>
+          <Button type="button" variant="ghost" size="md" onClick={goBack} icon={<ArrowLeft className="h-4 w-4" aria-hidden="true" />}>
             Back
           </Button>
         ) : (
@@ -356,9 +393,16 @@ export function QualificationForm({ config, offerId, funnelId = "organic", thank
         )}
         {showContinueButton && (
           <Button
+            // Only the final (contact) step's button is a real submit
+            // control — clicking/tapping it fires the form's native
+            // onSubmit (handleFormSubmit), which is the single place
+            // handleSubmit() gets called from on this step. Every earlier
+            // step stays type="button" with its own onClick, exactly as
+            // before, so nothing here can double-fire a submission.
+            type={isLastStep ? "submit" : "button"}
             variant="accent"
             size="lg"
-            onClick={handleContinueClick}
+            onClick={isLastStep ? undefined : handleContinueClick}
             disabled={!canAdvance() || submitting}
             icon={
               submitting ? (
@@ -372,7 +416,7 @@ export function QualificationForm({ config, offerId, funnelId = "organic", thank
           </Button>
         )}
       </div>
-    </div>
+    </form>
   );
 }
 
