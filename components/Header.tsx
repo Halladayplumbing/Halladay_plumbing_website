@@ -66,7 +66,7 @@ export function Header() {
         <div className="container-page flex h-16 items-center justify-between gap-3 lg:h-20">
           <Link href="/" className="flex shrink-0 items-center gap-2 truncate">
             <Image src="/brand/logo.png" alt="" width={40} height={40} className="h-9 w-9 shrink-0 lg:h-10 lg:w-10" priority />
-            <span className="truncate text-base font-extrabold tracking-tight text-primary sm:text-lg lg:text-xl">
+            <span className="truncate text-base font-extrabold uppercase tracking-tight text-ink sm:text-lg lg:text-xl">
               {business.name}
             </span>
           </Link>
@@ -89,7 +89,7 @@ export function Header() {
         <div className="container-page flex h-16 items-center justify-between gap-4 lg:h-20">
           <Link href="/" className="flex shrink-0 items-center gap-2">
             <Image src="/brand/logo.png" alt="" width={44} height={44} className="h-10 w-10 shrink-0 lg:h-11 lg:w-11" priority />
-            <span className="text-lg font-extrabold tracking-tight text-primary lg:text-xl">{business.name}</span>
+            <span className="text-lg font-extrabold uppercase tracking-tight text-ink lg:text-xl">{business.name}</span>
           </Link>
 
           <nav aria-label="Primary" className="hidden items-center gap-0.5 xl:flex">
