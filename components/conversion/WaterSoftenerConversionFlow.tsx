@@ -1,47 +1,27 @@
 "use client";
 
-import { useState } from "react";
-import { HardWaterSignsCheck } from "@/components/conversion/HardWaterSignsCheck";
-import { OfferEligibility } from "@/components/conversion/OfferEligibility";
-import { OfferStack } from "@/components/conversion/OfferStack";
 import { QualificationForm } from "@/components/forms/QualificationForm";
 import { forms } from "@/data/forms";
-import type { HardWaterResult } from "@/data/hardWaterCheck";
 
 const waterSoftenerForm = forms.find((f) => f.id === "water-softener")!;
 
-type Stage = "check" | "eligibility" | "qualified";
-
-// Orchestrates the full water softener conversion path per the campaign
-// spec: Hard Water Signs Check -> Offer Eligibility -> (if qualified)
-// the Water Protection Package + the existing water-softener
-// QualificationForm for contact capture. Deliberately reuses the
-// existing QualificationForm/lead pipeline for the final step instead of
-// building a second, parallel form — there is exactly one lead-capture
-// path on this site.
+// A single, linear qualifier -> contact-info flow, same pattern as every
+// other service's QualificationForm usage on the site. Previously this
+// staged a visitor through a separate Hard Water Signs Check quiz
+// (components/conversion/HardWaterSignsCheck.tsx) and a separate Offer
+// Eligibility quiz (components/conversion/OfferEligibility.tsx) before
+// ever reaching this form — three different "Step 1 of N" progress
+// counters back to back. Consolidated into the water-softener
+// QualificationForm's own three qualifying questions (see its entry in
+// data/forms.ts) per the funnel-simplification brief. Those two
+// components are left in place, just unused, rather than deleted, in
+// case they're wanted again.
 export function WaterSoftenerConversionFlow() {
-  const [stage, setStage] = useState<Stage>("check");
-  const [, setResult] = useState<HardWaterResult | null>(null);
-
-  if (stage === "check") {
-    return (
-      <HardWaterSignsCheck
-        onContinue={(r) => {
-          setResult(r);
-          setStage("eligibility");
-        }}
-      />
-    );
-  }
-
-  if (stage === "eligibility") {
-    return <OfferEligibility onQualified={() => setStage("qualified")} />;
-  }
-
   return (
-    <div className="space-y-6">
-      <OfferStack />
-      <QualificationForm config={waterSoftenerForm} funnelId="water-softener-installation" thankYouPath="/thank-you/water-softener/" />
-    </div>
+    <QualificationForm
+      config={waterSoftenerForm}
+      funnelId="water-softener-installation"
+      thankYouPath="/thank-you/water-softener/"
+    />
   );
 }

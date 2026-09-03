@@ -28,14 +28,11 @@ export const metadata = pageMetadata({
 });
 
 const signs = [
-  "White mineral deposits on fixtures",
-  "Spotting on glassware and dishes",
-  "Scale buildup around faucets",
-  "Soap and detergent not lathering well",
-  "Buildup inside the shower or tub",
-  "Buildup inside water-using appliances",
-  "Scale accumulating inside a water heater",
-  "Skin or hair feeling dry after washing",
+  "White buildup around faucets and showerheads",
+  "Spots or cloudy residue on dishes and glass",
+  "Scale inside water-using appliances",
+  "Dry-feeling skin or hair",
+  "A water softener that doesn't seem to be doing its job",
 ];
 
 const benefits = [
@@ -130,22 +127,6 @@ export default function WaterSoftenersPage() {
         </div>
       </section>
 
-      {/* Signs checklist */}
-      <section className="bg-surface py-14 lg:py-20">
-        <div className="container-page">
-          <h2 className="text-2xl font-extrabold text-ink sm:text-3xl">Signs of Hard Water in Your Home</h2>
-          <p className="mt-3 max-w-2xl text-ink-muted">If any of these sound familiar, hard water may be affecting your home.</p>
-          <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {signs.map((s) => (
-              <div key={s} className="flex items-start gap-2 rounded-lg border border-border bg-background p-4 text-sm text-ink">
-                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
-                {s}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Benefits */}
       <section className="py-14 lg:py-20">
         <div className="container-page grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-14">
@@ -189,12 +170,40 @@ export default function WaterSoftenersPage() {
         </section>
       )}
 
-      <section id="qualify" className="scroll-mt-24 bg-surface py-14 lg:py-20">
+      {/* Signs of hard water — kept as a static list homeowners can
+          recognize themselves against, not an interactive quiz. Sits
+          directly above the qualifier/CTA per the funnel-simplification
+          brief. */}
+      <section className="bg-surface py-14 lg:py-20">
+        <div className="container-page mx-auto max-w-2xl text-center">
+          <h2 className="text-2xl font-extrabold text-ink sm:text-3xl">Seeing Signs of Hard Water?</h2>
+          <p className="mt-3 text-ink-muted">Southern Utah&apos;s mineral-heavy water can show up throughout the home.</p>
+
+          <div className="mt-8 grid grid-cols-1 gap-3 text-left sm:grid-cols-2">
+            {signs.map((s) => (
+              <div key={s} className="flex items-start gap-2 rounded-lg border border-border bg-background p-4 text-sm text-ink">
+                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+                {s}
+              </div>
+            ))}
+          </div>
+
+          <p className="mt-8 text-ink-muted">
+            Halladay Plumbing can check your water conditions, existing equipment, and key plumbing
+            components throughout the home.
+          </p>
+
+          <CTAButton href="#qualify" size="lg" className="mt-6">
+            Request a Home Water Assessment
+          </CTAButton>
+        </div>
+      </section>
+
+      <section id="qualify" className="scroll-mt-24 py-14 lg:py-20">
         <div className="container-page mx-auto max-w-xl">
-          <h2 className="text-center text-2xl font-extrabold text-ink sm:text-3xl">60-Second Hard Water Signs Check</h2>
+          <h2 className="text-center text-2xl font-extrabold text-ink sm:text-3xl">Request a Home Water Assessment</h2>
           <p className="mt-2 text-center text-ink-muted">
-            Answer a few quick questions to see what your home&apos;s signs suggest — no name, phone, or
-            email required to see your result.
+            Answer a few quick questions and Halladay will follow up to schedule your assessment.
           </p>
           <div className="mt-8">
             <WaterSoftenerConversionFlow />

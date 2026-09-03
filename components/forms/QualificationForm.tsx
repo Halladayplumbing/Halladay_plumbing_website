@@ -193,7 +193,10 @@ export function QualificationForm({ config, offerId, funnelId = "organic", thank
       leadContext: {
         urgency: (answers["timeline"] as string) || (answers["urgency"] as string) || undefined,
         propertyType: (answers["property-type"] as string) || undefined,
-        city: contact.city || undefined,
+        // Falls back to a "location" qualifying-question answer (e.g. the
+        // water-softener form's simplified flow) when the contact step
+        // itself doesn't ask for city — see hideCityField.
+        city: contact.city || (answers["location"] as string) || undefined,
       },
       attribution,
       funnel: {
@@ -227,6 +230,13 @@ export function QualificationForm({ config, offerId, funnelId = "organic", thank
   // tap itself is the action, matching native lead-ad form behavior.
   const showContinueButton = step.type !== "single-select" || submitting;
 
+  // Looks up the human-readable label for a qualifying-question answer
+  // (falls back to the raw value if no matching option is found).
+  function answerLabel(stepId: string, value: string): string {
+    const matchingStep = config.steps.find((s) => s.id === stepId);
+    return matchingStep?.options?.find((o) => o.value === value)?.label ?? value;
+  }
+
   return (
     <form
       id="halladay-qualification-form"
@@ -240,6 +250,21 @@ export function QualificationForm({ config, offerId, funnelId = "organic", thank
           External Tracking) can pick it up alongside the contact fields,
           without adding any visible input or changing the wizard. */}
       <input type="hidden" name="service" value={config.serviceId} />
+
+      {/* Same reasoning as the service field above — the single/multi-select
+          questions are answered via OptionCard buttons, not native inputs
+          with a `name`, so a form-scanning script would otherwise never
+          see them. Mirrors each answer into a hidden field (using its
+          human-readable label rather than its raw slug) once it's been
+          answered, keyed by the question id. */}
+      {Object.entries(answers).map(([stepId, value]) => (
+        <input
+          key={stepId}
+          type="hidden"
+          name={`qualifier_${stepId}`}
+          value={Array.isArray(value) ? value.map((v) => answerLabel(stepId, v)).join(", ") : answerLabel(stepId, value)}
+        />
+      ))}
 
       <ProgressIndicator step={stepIndex + 1} total={totalSteps} />
 
@@ -343,16 +368,18 @@ export function QualificationForm({ config, offerId, funnelId = "organic", thank
                     />
                   </Field>
                 )}
-                <Field label="City">
-                  <input
-                    type="text"
-                    name="city"
-                    autoComplete="address-level2"
-                    value={contact.city}
-                    onChange={(e) => setContact((c) => ({ ...c, city: e.target.value }))}
-                    className="form-input"
-                  />
-                </Field>
+                {!step.hideCityField && (
+                  <Field label="City">
+                    <input
+                      type="text"
+                      name="city"
+                      autoComplete="address-level2"
+                      value={contact.city}
+                      onChange={(e) => setContact((c) => ({ ...c, city: e.target.value }))}
+                      className="form-input"
+                    />
+                  </Field>
+                )}
                 <Field label="Preferred contact method">
                   <select
                     name="preferredContact"
@@ -416,6 +443,10 @@ export function QualificationForm({ config, offerId, funnelId = "organic", thank
           </Button>
         )}
       </div>
+
+      {isLastStep && step.microcopy && (
+        <p className="mt-3 text-center text-xs text-ink-muted">{step.microcopy}</p>
+      )}
     </form>
   );
 }

@@ -21,6 +21,13 @@ export interface FormStep {
   options?: StepOption[];
   /** Contact steps only: show a "Company / Builder Name" field. */
   showCompanyField?: boolean;
+  /** Contact steps only: hide the City field — set when an earlier step
+   *  in the same form already asked for the home's location, so we don't
+   *  ask twice. */
+  hideCityField?: boolean;
+  /** Contact steps only: short line rendered under the submit button
+   *  (e.g. "We'll contact you directly..."). */
+  microcopy?: string;
 }
 
 export interface QualificationFormConfig {
@@ -51,72 +58,69 @@ export const forms: QualificationFormConfig[] = [
     id: "water-softener",
     serviceId: "water-softeners",
     formName: "Water Softener Qualification",
-    ctaText: "Request My Hard Water Assessment",
+    // Simplified per the funnel-optimization brief (Sep 2026): three
+    // qualifying questions, then straight to contact info. Kyler calls
+    // every submitted lead and handles further qualifying/scheduling by
+    // phone, so the website no longer needs to ask about symptoms,
+    // property type, or timeline before someone can request an
+    // assessment. See app/thank-you/[service]/page.tsx's "water-softener"
+    // entry for what the visitor sees after submitting.
+    ctaText: "Request My Assessment",
     leadType: "water_softener_lead",
     defaultPriority: "high",
     steps: [
       {
-        id: "intent",
+        id: "homeowner",
         type: "single-select",
-        title: "What are you looking for?",
+        title: "Do you own the home?",
         options: [
-          { value: "new-install", label: "New water softener installation" },
-          { value: "replace-existing", label: "Replace my existing system" },
-          { value: "service-repair", label: "Service or repair my current system" },
-          { value: "not-sure", label: "Not sure yet" },
+          { value: "yes", label: "Yes, I own the home" },
+          { value: "no", label: "No, I rent or manage the property" },
         ],
       },
       {
-        id: "symptoms",
-        type: "multi-select",
-        title: "What are you noticing in your home?",
-        helpText: "Select all that apply.",
+        id: "need",
+        type: "single-select",
+        title: "What would you like help with?",
         options: [
-          { value: "white-buildup", label: "White mineral buildup" },
-          { value: "spots-fixtures", label: "Spots on fixtures" },
-          { value: "spotty-dishes", label: "Spotty dishes or glassware" },
-          { value: "scale-faucets", label: "Scale around faucets" },
-          { value: "shower-buildup", label: "Shower buildup" },
-          { value: "appliance-buildup", label: "Appliance buildup" },
-          { value: "hard-water-feel", label: "Water feels hard" },
-          { value: "protect-home", label: "Mainly looking to protect my home" },
-          { value: "other", label: "Other" },
+          { value: "no-softener", label: "I don't currently have a water softener" },
+          { value: "not-working-well", label: "My existing softener isn't working well" },
+          { value: "replace-upgrade", label: "I want to replace or upgrade my current system" },
+          { value: "not-sure", label: "I'm not sure what I need — I'd like my water checked" },
         ],
       },
       {
-        id: "current-softener",
+        // Reuses the same city list as the site's other service-area
+        // qualification (data/offerEligibility.ts, data/serviceAreas.ts)
+        // rather than adding a ZIP field — no ZIP-to-city mapping has
+        // been verified with Halladay yet.
+        id: "location",
         type: "single-select",
-        title: "Do you currently have a water softener?",
+        title: "Where is the home located?",
         options: [
-          { value: "yes", label: "Yes" },
-          { value: "no", label: "No" },
-          { value: "not-sure", label: "Not sure" },
+          { value: "cedar-city", label: "Cedar City" },
+          { value: "enoch", label: "Enoch" },
+          { value: "parowan", label: "Parowan" },
+          { value: "kanarraville", label: "Kanarraville" },
+          { value: "new-harmony", label: "New Harmony" },
+          { value: "hurricane", label: "Hurricane" },
+          { value: "st-george", label: "St. George" },
+          { value: "panguitch", label: "Panguitch" },
+          { value: "duck-creek-village", label: "Duck Creek Village" },
+          { value: "other", label: "Somewhere else in Southern Utah" },
         ],
       },
       {
-        id: "property-type",
-        type: "single-select",
-        title: "What type of property is this?",
-        options: [
-          { value: "single-family", label: "Single-family home" },
-          { value: "townhome-condo", label: "Townhome or condo" },
-          { value: "rental", label: "Rental property" },
-          { value: "commercial", label: "Commercial property" },
-          { value: "other", label: "Other" },
-        ],
+        id: "contact",
+        type: "contact",
+        title: "Request Your Home Water Assessment",
+        helpText:
+          "Enter your information below. A member of the Halladay Plumbing team will give you a call to learn a little more about what's going on and find a time that works for your assessment.",
+        microcopy: "We'll contact you directly to go over your water concerns and next steps.",
+        // Location was already collected as its own qualifying question
+        // above — don't ask again on the contact step.
+        hideCityField: true,
       },
-      {
-        id: "timeline",
-        type: "single-select",
-        title: "When are you looking to have this completed?",
-        options: [
-          { value: "asap", label: "As soon as possible" },
-          { value: "1-2-weeks", label: "Within 1–2 weeks" },
-          { value: "30-days", label: "Within 30 days" },
-          { value: "researching", label: "Researching options" },
-        ],
-      },
-      contactStep,
     ],
   },
   {
