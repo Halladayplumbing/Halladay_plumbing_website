@@ -45,6 +45,15 @@ export interface Lead {
   };
 
   timestamp: string;
+
+  // Anti-bot fields — only populated by forms with antiBot protection
+  // enabled (currently just the water-softener QualificationForm). Left
+  // undefined by every other form; /api/lead only enforces them for
+  // leadType "water_softener_lead", so no other submission path is
+  // affected.
+  turnstileToken?: string;
+  /** Honeypot value — must be empty. Any value present means a bot filled a field real users never see. */
+  website?: string;
 }
 
 export interface LeadSubmissionResult {

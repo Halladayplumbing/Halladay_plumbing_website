@@ -37,6 +37,12 @@ export interface QualificationFormConfig {
   ctaText: string; // dynamic final CTA, e.g. "Get My Water Softener Estimate"
   leadType: string;
   defaultPriority: "urgent" | "high" | "standard" | "nurture";
+  /** Enables honeypot + Cloudflare Turnstile + stricter required-field
+   *  validation before the final submit is allowed through — see
+   *  components/forms/QualificationForm.tsx and app/api/lead/route.ts.
+   *  Opt-in and off by default so every other form's behavior is
+   *  completely unchanged. */
+  antiBot?: boolean;
   steps: FormStep[];
 }
 
@@ -67,6 +73,10 @@ export const forms: QualificationFormConfig[] = [
     // entry for what the visitor sees after submitting.
     ctaText: "Request My Assessment",
     leadType: "water_softener_lead",
+    // Blank/bot submissions were reaching GHL as empty contacts — see
+    // components/forms/QualificationForm.tsx and app/api/lead/route.ts
+    // for the honeypot/Turnstile/validation gate this enables.
+    antiBot: true,
     defaultPriority: "high",
     steps: [
       {
